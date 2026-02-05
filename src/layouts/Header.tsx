@@ -571,198 +571,10 @@ const Header = () => {
                   <nav>
                     <ul>
                       <li className="active">
-                        <a href="/">
-                          Home <i className="fa fa-angle-down"></i>
-                        </a>
-                        <ul className="sub_menu">
-                          <li>
-                            <a href="/">Home 1</a>
-                          </li>
-                          <li>
-                            <a href="index-2.html">Home 2</a>
-                          </li>
-                          <li>
-                            <a href="index-3.html">Home 3</a>
-                          </li>
-                          <li>
-                            <a href="index-4.html">Home 4</a>
-                          </li>
-                          <li>
-                            <a href="index-5.html">Home 5</a>
-                          </li>
-                          <li>
-                            <a href="index-6.html">Home 6</a>
-                          </li>
-                          <li>
-                            <a href="index-7.html">Home 7</a>
-                          </li>
-                          <li>
-                            <a href="index-8.html">Home 8</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li className="mega_items">
-                        <a href="shop.html">
-                          shop <i className="fa fa-angle-down"></i>
-                        </a>
-                        <ul className="mega_menu">
-                          <li>
-                            <a href="#">Shop Layouts</a>
-                            <ul>
-                              <li>
-                                <a href="shop-fullwidth.html">Full Width</a>
-                              </li>
-                              <li>
-                                <a href="shop-fullwidth-list.html">
-                                  Full Width list
-                                </a>
-                              </li>
-                              <li>
-                                <a href="shop-right-sidebar.html">
-                                  Right Sidebar
-                                </a>
-                              </li>
-                              <li>
-                                <a href="shop-right-sidebar-list.html">
-                                  Right Sidebar list
-                                </a>
-                              </li>
-                              <li>
-                                <a href="shop-list.html">List View</a>
-                              </li>
-                            </ul>
-                          </li>
-                          <li>
-                            <a href="#">other Pages</a>
-                            <ul>
-                              <li>
-                                <a href="portfolio.html">portfolio</a>
-                              </li>
-                              <li>
-                                <a href="portfolio-details.html">
-                                  portfolio details
-                                </a>
-                              </li>
-                              <li>
-                                <a href="cart.html">cart</a>
-                              </li>
-                              <li>
-                                <a href="checkout.html">Checkout</a>
-                              </li>
-                              <li>
-                                <a href="my-account.html">my account</a>
-                              </li>
-                            </ul>
-                          </li>
-                          <li>
-                            <a href="#">Product Types</a>
-                            <ul>
-                              <li>
-                                <a href="product-details.html">
-                                  product details
-                                </a>
-                              </li>
-                              <li>
-                                <a href="product-sidebar.html">
-                                  product sidebar
-                                </a>
-                              </li>
-                              <li>
-                                <a href="product-gallery.html">
-                                  product gallery
-                                </a>
-                              </li>
-                              <li>
-                                <a href="product-grouped.html">
-                                  product grouped
-                                </a>
-                              </li>
-                              <li>
-                                <a href="variable-product.html">
-                                  product variable
-                                </a>
-                              </li>
-                            </ul>
-                          </li>
-                          <li>
-                            <a href="#">collection</a>
-                            <ul>
-                              <li>
-                                <a href="shop.html">Handbag</a>
-                              </li>
-                              <li>
-                                <a href="shop.html">Accessories</a>
-                              </li>
-                              <li>
-                                <a href="shop.html">Clothing</a>
-                              </li>
-                              <li>
-                                <a href="shop.html">Shoes</a>
-                              </li>
-                              <li>
-                                <a href="shop.html">Check Trousers</a>
-                              </li>
-                            </ul>
-                          </li>
-                          <li className="banner_menu">
-                            <a href="#">
-                              <img src="/assets/img/bg/banner1.jpg" alt="" />
-                            </a>
-                          </li>
-                        </ul>
+                        <a href="/">Home</a>
                       </li>
                       <li>
-                        <a href="blog.html">
-                          blog <i className="fa fa-angle-down"></i>
-                        </a>
-                        <ul className="sub_menu pages">
-                          <li>
-                            <a href="blog-details.html">blog details</a>
-                          </li>
-                          <li>
-                            <a href="blog-sidebar.html">blog Sidebar</a>
-                          </li>
-                          <li>
-                            <a href="blog-fullwidth.html">blog fullwidth</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li>
-                        <a href="#">
-                          pages <i className="fa fa-angle-down"></i>
-                        </a>
-                        <ul className="sub_menu pages">
-                          <li>
-                            <a href="about.html">About Us</a>
-                          </li>
-                          <li>
-                            <a href="services.html">services</a>
-                          </li>
-                          <li>
-                            <a href="faq.html">Frequently Questions</a>
-                          </li>
-                          <li>
-                            <a href="login.html">login</a>
-                          </li>
-                          <li>
-                            <a href="my-account.html">my account</a>
-                          </li>
-                          <li>
-                            <a href="wishlist.html">Wishlist</a>
-                          </li>
-                          <li>
-                            <a href="404.html">Error 404</a>
-                          </li>
-                          <li>
-                            <a href="compare.html">compare</a>
-                          </li>
-                          <li>
-                            <a href="privacy-policy.html">privacy policy</a>
-                          </li>
-                          <li>
-                            <a href="coming-soon.html">coming soon</a>
-                          </li>
-                        </ul>
+                        <a href="shop.html">Products</a>
                       </li>
                     </ul>
                   </nav>
@@ -778,13 +590,7 @@ const Header = () => {
                   <nav>
                     <ul>
                       <li>
-                        <a href="#">Specials</a>
-                      </li>
-                      <li>
-                        <a href="#">Sneaker</a>
-                      </li>
-                      <li>
-                        <a href="about.html">About us</a>
+                        <a href="about.html">About Us</a>
                       </li>
                       <li>
                         <a href="contact.html">Contact Us</a>
@@ -810,50 +616,10 @@ const Header = () => {
                           <a href="/">Home</a>
                         </li>
                         <li>
-                          <a href="shop_category.html">shop</a>
+                          <a href="shop.html">Products</a>
                         </li>
                         <li>
-                          <a href="about.html">About us</a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            pages <i className="fa fa-angle-down"></i>
-                          </a>
-                          <ul className="sub_menu pages">
-                            <li>
-                              <a href="about.html">About Us</a>
-                            </li>
-                            <li>
-                              <a href="services.html">services</a>
-                            </li>
-                            <li>
-                              <a href="faq.html">Frequently Questions</a>
-                            </li>
-                            <li>
-                              <a href="login.html">login</a>
-                            </li>
-                            <li>
-                              <a href="my-account.html">my account</a>
-                            </li>
-                            <li>
-                              <a href="wishlist.html">Wishlist</a>
-                            </li>
-                            <li>
-                              <a href="404.html">Error 404</a>
-                            </li>
-                            <li>
-                              <a href="compare.html">compare</a>
-                            </li>
-                            <li>
-                              <a href="privacy-policy.html">privacy policy</a>
-                            </li>
-                            <li>
-                              <a href="coming-soon.html">coming soon</a>
-                            </li>
-                          </ul>
-                        </li>
-                        <li>
-                          <a href="blog.html">blog</a>
+                          <a href="about.html">About Us</a>
                         </li>
                         <li>
                           <a href="contact.html">Contact Us</a>

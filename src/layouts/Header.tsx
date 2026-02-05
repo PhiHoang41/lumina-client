@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 
 const Header = () => {
   const [isOffcanvasOpen, setIsOffcanvasOpen] = useState(false);
@@ -488,9 +489,9 @@ const Header = () => {
                 </div>
                 <div className="col-lg-4">
                   <div className="logo">
-                    <a href="/">
+                    <Link to="/">
                       <img src="/assets/img/logo/logo.png" alt="" />
-                    </a>
+                    </Link>
                   </div>
                 </div>
                 <div className="col-lg-4">
@@ -570,20 +571,20 @@ const Header = () => {
                 <div className="main_menu">
                   <nav>
                     <ul>
-                      <li className="active">
-                        <a href="/">Home</a>
+                      <li>
+                        <NavLink to="/">Home</NavLink>
                       </li>
                       <li>
-                        <a href="shop.html">Products</a>
+                        <NavLink to="/products">Products</NavLink>
                       </li>
                     </ul>
                   </nav>
                 </div>
               </div>
               <div className="logo_container">
-                <a href="/">
+                <Link to="/">
                   <img src="/assets/img/logo/logo.png" alt="" />
-                </a>
+                </Link>
               </div>
               <div className="right_menu">
                 <div className="main_menu">
@@ -613,10 +614,10 @@ const Header = () => {
                     <nav>
                       <ul>
                         <li className="active">
-                          <a href="/">Home</a>
+                          <NavLink to="/">Home</NavLink>
                         </li>
                         <li>
-                          <a href="shop.html">Products</a>
+                          <NavLink to="/products">Products</NavLink>
                         </li>
                         <li>
                           <a href="about.html">About Us</a>

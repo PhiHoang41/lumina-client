@@ -120,6 +120,12 @@
   transform: translateY(-50%) scale(1.1);
 }
 
+/* NavLink Active Styles */
+.main_menu nav ul li a.active,
+.main_menu nav ul li .active {
+  color: #ff6a28 !important;
+}
+
 /* Hero Slider Custom Styles */
 .slider_area {
   position: relative;

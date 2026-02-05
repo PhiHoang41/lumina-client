@@ -45,32 +45,12 @@ const Header = () => {
 
           <div className="top_right">
             <ul>
-              <li className="top_links">
-                <a
-                  href="#"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    toggleDropdown("topAccount");
-                  }}
-                >
-                  My Account <i className="ion-chevron-down"></i>
-                </a>
-                <ul
-                  className={`dropdown_links ${activeDropdown === "topAccount" ? "show" : ""}`}
-                >
-                  <li>
-                    <a href="wishlist.html">My Wish List</a>
-                  </li>
-                  <li>
-                    <a href="my-account.html">My Account</a>
-                  </li>
-                  <li>
-                    <a href="#">Sign In</a>
-                  </li>
-                  <li>
-                    <a href="compare.html">Compare Products</a>
-                  </li>
-                </ul>
+              <li>
+                <Link to="/login">Login</Link>
+              </li>
+              <li>/</li>
+              <li>
+                <Link to="/register">Register</Link>
               </li>
               <li className="language">
                 <a
@@ -150,11 +130,11 @@ const Header = () => {
             <div className="middel_links">
               <ul>
                 <li>
-                  <a href="login.html">Login</a>
+                  <Link to="/login">Login</Link>
                 </li>
                 <li>/</li>
                 <li>
-                  <a href="login.html">Register</a>
+                  <Link to="/register">Register</Link>
                 </li>
               </ul>
             </div>
@@ -210,7 +190,7 @@ const Header = () => {
                   </table>
                 </div>
                 <div className="cart_button view_cart">
-                  <a href="cart.html">View Cart</a>
+                  <Link to="/cart">View Cart</Link>
                 </div>
                 <div className="cart_button checkout">
                   <a href="checkout.html">Checkout</a>
@@ -443,24 +423,12 @@ const Header = () => {
               <div className="col-lg-5 col-md-12">
                 <div className="top_right text-right">
                   <ul>
-                    <li className="top_links">
-                      <a href="#">
-                        My Account <i className="ion-chevron-down"></i>
-                      </a>
-                      <ul className="dropdown_links">
-                        <li>
-                          <a href="wishlist.html">My Wish List</a>
-                        </li>
-                        <li>
-                          <a href="my-account.html">My Account</a>
-                        </li>
-                        <li>
-                          <a href="#">Sign In</a>
-                        </li>
-                        <li>
-                          <a href="compare.html">Compare Products</a>
-                        </li>
-                      </ul>
+                    <li>
+                      <Link to="/login">Login</Link>
+                    </li>
+                    <li>/</li>
+                    <li>
+                      <Link to="/register">Register</Link>
                     </li>
                   </ul>
                 </div>
@@ -554,7 +522,7 @@ const Header = () => {
                           </table>
                         </div>
                         <div className="cart_button view_cart">
-                          <a href="cart.html">View Cart</a>
+                          <Link to="/cart">View Cart</Link>
                         </div>
                         <div className="cart_button checkout">
                           <a href="checkout.html">Checkout</a>

@@ -1,25 +1,11 @@
-import { Link } from "react-router-dom";
+// This component is deprecated. Please use the shared Breadcrumb from /src/components/Breadcrumb.tsx
+// Keeping this for backward compatibility
+import SharedBreadcrumb from "../../../components/Breadcrumb";
 
 const Breadcrumb = () => {
-  return (
-    <div className="breadcrumbs_area">
-      <div className="container">
-        <div className="row">
-          <div className="col-12">
-            <div className="breadcrumb_content">
-              <ul>
-                <li>
-                  <Link to="/">home</Link>
-                </li>
-                <li>/</li>
-                <li>shop</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+  const items = [{ label: "home", path: "/" }, { label: "shop" }];
+
+  return <SharedBreadcrumb items={items} />;
 };
 
 export default Breadcrumb;

@@ -1,0 +1,51 @@
+/* Swiper Navigation Buttons - Simple FontAwesome Icons */
+.productGallery :global(.swiper-button-next),
+.productGallery :global(.swiper-button-prev) {
+  width: auto;
+  height: auto;
+  background: none;
+  transition: all 0.3s ease;
+}
+
+.productGallery :global(.swiper-button-next):after,
+.productGallery :global(.swiper-button-prev):after {
+  font-size: 16px;
+  color: #666;
+  font-weight: normal;
+}
+
+.productGallery :global(.swiper-button-next):hover:after,
+.productGallery :global(.swiper-button-prev):hover:after {
+  color: #e65540;
+}
+
+/* Position adjustments for thumbnails */
+.productGallery :global(.swiper-button-next) {
+  right: 0;
+}
+
+.productGallery :global(.swiper-button-prev) {
+  left: 0;
+}
+
+/* Hide when swiper is not hovered */
+.productGallery :global(.swiper-button-next),
+.productGallery :global(.swiper-button-prev) {
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+}
+
+.productGallery:hover :global(.swiper-button-next),
+.productGallery:hover :global(.swiper-button-prev) {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Disabled state */
+.productGallery :global(.swiper-button-disabled) {
+  opacity: 0.3 !important;
+  cursor: not-allowed;
+}

@@ -32,7 +32,7 @@ const ColorFilter = ({
                   : "inherit",
               }}
             >
-              {color.name} <span>{color.count}</span>
+              {color.name}
             </a>
           </li>
         ))}

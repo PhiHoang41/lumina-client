@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { ProductDetails } from "../types/productDetails.types";
 import styles from "./ProductInfo.module.css";
+import { formatVND } from "../../../utils/currency";
 
 interface ProductInfoProps {
   product: ProductDetails;
@@ -44,9 +45,9 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
 
         {/* Price */}
         <div className="product_price">
-          <span className="current_price">${product.price.toFixed(2)}</span>
+          <span className="current_price">{formatVND(product.price)}</span>
           {product.oldPrice && (
-            <span className="old_price">${product.oldPrice.toFixed(2)}</span>
+            <span className="old_price">{formatVND(product.oldPrice)}</span>
           )}
         </div>
 

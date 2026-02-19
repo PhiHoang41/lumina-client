@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import type { Product, ViewMode } from "../../types/product.types";
+import { formatVND } from "../../../../utils/currency";
+import styles from "./ProductCard.module.css";
 
 interface ProductCardProps {
   product: Product;
@@ -11,13 +13,10 @@ const ProductCard = ({ product, viewMode }: ProductCardProps) => {
     <div
       className={`col-lg-${viewMode === "grid-3" ? "4" : viewMode === "grid-4" ? "3" : viewMode === "grid-5" ? "2-4" : "12"} col-md-4 col-12`}
     >
-      <div className="single_product">
-        <div className="product_thumb">
-          <Link className="primary_img" to={`/products/${product.slug}`}>
+      <div className={`single_product ${styles.singleProduct}`}>
+        <div className={styles.productThumb}>
+          <Link className={styles.primaryImg} to={`/products/${product.slug}`}>
             <img src={product.image} alt={product.name} />
-          </Link>
-          <Link className="secondary_img" to={`/products/${product.slug}`}>
-            <img src={product.hoverImage} alt={product.name} />
           </Link>
 
           <div className="quick_button">
@@ -25,23 +24,6 @@ const ProductCard = ({ product, viewMode }: ProductCardProps) => {
               Xem sản phẩm
             </Link>
           </div>
-
-          {(product.isSale || product.isNew) && (
-            <div
-              className={product.isSale && product.isNew ? "double_base" : ""}
-            >
-              {product.isSale && product.discount && (
-                <div className="product_sale">
-                  <span>-{product.discount}%</span>
-                </div>
-              )}
-              {product.isNew && (
-                <div className="label_product">
-                  <span>new</span>
-                </div>
-              )}
-            </div>
-          )}
         </div>
 
         {/* Grid Content */}
@@ -49,10 +31,7 @@ const ProductCard = ({ product, viewMode }: ProductCardProps) => {
           <h3>
             <Link to={`/products/${product.slug}`}>{product.name}</Link>
           </h3>
-          <span className="current_price">£{product.price.toFixed(2)}</span>
-          {product.oldPrice && (
-            <span className="old_price">£{product.oldPrice.toFixed(2)}</span>
-          )}
+          <span className="current_price">{formatVND(product.price)}</span>
         </div>
 
         {/* List Content */}
@@ -72,10 +51,7 @@ const ProductCard = ({ product, viewMode }: ProductCardProps) => {
             </ul>
           </div>
           <div className="product_price">
-            <span className="current_price">£{product.price.toFixed(2)}</span>
-            {product.oldPrice && (
-              <span className="old_price">£{product.oldPrice.toFixed(2)}</span>
-            )}
+            <span className="current_price">{formatVND(product.price)}</span>
           </div>
           <div className="product_desc">
             <p>{product.description}</p>

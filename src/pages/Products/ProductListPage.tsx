@@ -1,122 +1,203 @@
 import { useState, useMemo } from "react";
-import type { ViewMode, SortOption, FilterState } from "./types/product.types";
-import { mockProducts } from "./data/mockProducts";
-import { mockFilterOptions } from "./data/mockFilters";
+import { useQuery } from "@tanstack/react-query";
+import type { FilterState } from "./types/product.types";
+import type { Product } from "../../services/productService";
 import Breadcrumb from "./components/Breadcrumb";
 import ProductSidebar from "./components/Sidebar/ProductSidebar";
 import ProductToolbar from "./components/ProductList/ProductToolbar";
 import ProductCard from "./components/ProductList/ProductCard";
 import Pagination from "./components/ProductList/Pagination";
+import productService from "../../services/productService";
+import categoryService from "../../services/categoryService";
 
 const ITEMS_PER_PAGE = 9;
 
 const ProductListPage = () => {
-  const [viewMode, setViewMode] = useState<ViewMode>("grid-3");
-  const [sortOption, setSortOption] = useState<SortOption>("rating");
   const [currentPage, setCurrentPage] = useState(1);
+  const [priceRangeInput, setPriceRangeInput] = useState<[number, number]>([
+    0, 10000000,
+  ]);
   const [filters, setFilters] = useState<FilterState>({
-    priceRange: [
-      mockFilterOptions.priceRange.min,
-      mockFilterOptions.priceRange.max,
-    ],
+    priceRange: [0, 10000000],
     selectedCategories: [],
-    selectedManufacturers: [],
     selectedColors: [],
-    selectedTags: [],
+    selectedSizes: [],
   });
 
-  // Filter products
-  const filteredProducts = useMemo(() => {
-    return mockProducts.filter((product) => {
-      // Price filter
-      if (
-        product.price < filters.priceRange[0] ||
-        product.price > filters.priceRange[1]
-      ) {
-        return false;
-      }
+  const { data: categoriesData } = useQuery({
+    queryKey: ["categories"],
+    queryFn: categoryService.getCategories,
+  });
 
-      // Category filter
-      if (
-        filters.selectedCategories.length > 0 &&
-        !filters.selectedCategories.includes(product.category)
-      ) {
-        return false;
-      }
+  const { data: allProductsData } = useQuery({
+    queryKey: ["allProducts"],
+    queryFn: () => productService.getProducts({ isActive: true, limit: 1000 }),
+  });
 
-      // Manufacturer filter
-      if (
-        filters.selectedManufacturers.length > 0 &&
-        !filters.selectedManufacturers.includes(product.manufacturer)
-      ) {
-        return false;
-      }
+  const categories = categoriesData?.data || [];
+  const allProducts = useMemo(() => {
+    return allProductsData?.data
+      ? allProductsData.data.map((item: Product) => {
+          const variants = item.variants || [];
+          const activeVariants = variants.filter(
+            (v) => v.isActive && v.stock > 0,
+          );
+          const minPrice =
+            activeVariants.length > 0
+              ? Math.min(...activeVariants.map((v) => v.price))
+              : variants.length > 0
+                ? Math.min(...variants.map((v) => v.price))
+                : 0;
 
-      // Color filter
-      if (
-        filters.selectedColors.length > 0 &&
-        !filters.selectedColors.includes(product.color)
-      ) {
-        return false;
-      }
+          const colors = new Set(variants.map((v) => v.color.name));
+          const color = Array.from(colors)[0] || "";
 
-      // Tag filter
-      if (
-        filters.selectedTags.length > 0 &&
-        !filters.selectedTags.some((tag) => product.tags.includes(tag))
-      ) {
-        return false;
-      }
+          return {
+            id: parseInt(item._id),
+            name: item.name,
+            slug: item.slug,
+            price: minPrice,
+            image: item.images?.[0] || "",
+            color,
+            description: item.description || "",
+          };
+        })
+      : [];
+  }, [allProductsData]);
 
-      return true;
-    });
-  }, [filters]);
+  const queryParams = useMemo(() => {
+    const params: Record<string, string | number | boolean> = {
+      page: currentPage,
+      limit: ITEMS_PER_PAGE,
+      isActive: true,
+    };
 
-  // Sort products
-  const sortedProducts = useMemo(() => {
-    const products = [...filteredProducts];
-
-    switch (sortOption) {
-      case "rating":
-        return products.sort((a, b) => b.rating - a.rating);
-      case "popularity":
-        return products.sort((a, b) => a.id - b.id);
-      case "newness":
-        return products.sort((a, b) => {
-          if (a.isNew && !b.isNew) return -1;
-          if (!a.isNew && b.isNew) return 1;
-          return 0;
-        });
-      case "price-low":
-        return products.sort((a, b) => a.price - b.price);
-      case "price-high":
-        return products.sort((a, b) => b.price - a.price);
-      case "name":
-        return products.sort((a, b) => a.name.localeCompare(b.name));
-      default:
-        return products;
+    if (filters.priceRange[0] > 0) {
+      params.minPrice = filters.priceRange[0];
     }
-  }, [filteredProducts, sortOption]);
+    if (filters.priceRange[1] < 10000000) {
+      params.maxPrice = filters.priceRange[1];
+    }
 
-  // Paginate products
-  const paginatedProducts = useMemo(() => {
-    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-    return sortedProducts.slice(startIndex, startIndex + ITEMS_PER_PAGE);
-  }, [sortedProducts, currentPage]);
+    if (filters.selectedCategories.length > 0) {
+      params.category = filters.selectedCategories[0];
+    }
 
-  const totalPages = Math.ceil(sortedProducts.length / ITEMS_PER_PAGE);
+    if (filters.selectedColors.length > 0) {
+      params.color = filters.selectedColors[0];
+    }
+
+    if (filters.selectedSizes.length > 0) {
+      params.size = filters.selectedSizes[0];
+    }
+
+    return params;
+  }, [filters, currentPage]);
+
+  const {
+    data: productsData,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["products", queryParams],
+    queryFn: () => productService.getProducts(queryParams),
+  });
+
+  const products = useMemo(() => {
+    return productsData?.data
+      ? productsData.data.map((item: Product) => {
+          const variants = item.variants || [];
+          const activeVariants = variants.filter(
+            (v) => v.isActive && v.stock > 0,
+          );
+          const minPrice =
+            activeVariants.length > 0
+              ? Math.min(...activeVariants.map((v) => v.price))
+              : variants.length > 0
+                ? Math.min(...variants.map((v) => v.price))
+                : 0;
+
+          const colors = new Set(variants.map((v) => v.color.name));
+          const color = Array.from(colors)[0] || "";
+
+          return {
+            id: parseInt(item._id),
+            name: item.name,
+            slug: item.slug,
+            price: minPrice,
+            image: item.images?.[0] || "",
+            color,
+            description: item.description || "",
+          };
+        })
+      : [];
+  }, [productsData]);
+  const total = productsData?.pagination.total || 0;
+  const totalPages = productsData?.pagination.totalPages || 1;
+
+  const filterOptions = useMemo(() => {
+    const categoryOptions = categories.map((cat) => ({
+      id: cat._id,
+      name: cat.name,
+      count: 0,
+    }));
+
+    const colorSet = new Set<string>();
+    allProducts.forEach((product) => {
+      if (product.color) {
+        colorSet.add(product.color);
+      }
+    });
+
+    const colorOptions = Array.from(colorSet).map((color) => ({
+      id: color,
+      name: color,
+      count: 0,
+    }));
+
+    const sizeSet = new Set<string>();
+    allProductsData?.data.forEach((item) => {
+      item.variants?.forEach((variant) => {
+        if (variant.isActive) {
+          sizeSet.add(variant.size);
+        }
+      });
+    });
+
+    const sizeOptions = Array.from(sizeSet).map((size) => ({
+      id: size,
+      name: size,
+      count: 0,
+    }));
+
+    let minPrice = 0;
+    let maxPrice = 10000000;
+    if (allProducts.length > 0) {
+      const prices = allProducts.map((p) => p.price);
+      minPrice = Math.min(...prices);
+      maxPrice = Math.max(...prices);
+    }
+
+    return {
+      categories: categoryOptions,
+      colors: colorOptions,
+      sizes: sizeOptions,
+      priceRange: {
+        min: minPrice,
+        max: maxPrice,
+      },
+    };
+  }, [categories, allProducts, allProductsData]);
+
   const currentStart = (currentPage - 1) * ITEMS_PER_PAGE + 1;
-  const currentEnd = Math.min(
-    currentPage * ITEMS_PER_PAGE,
-    sortedProducts.length,
-  );
+  const currentEnd = Math.min(currentPage * ITEMS_PER_PAGE, total);
 
-  // Filter handlers
   const handlePriceChange = (value: [number, number]) => {
-    setFilters((prev) => ({ ...prev, priceRange: value }));
+    setPriceRangeInput(value);
   };
 
   const handlePriceFilter = () => {
+    setFilters((prev) => ({ ...prev, priceRange: priceRangeInput }));
     setCurrentPage(1);
   };
 
@@ -124,18 +205,8 @@ const ProductListPage = () => {
     setFilters((prev) => ({
       ...prev,
       selectedCategories: prev.selectedCategories.includes(categoryId)
-        ? prev.selectedCategories.filter((id) => id !== categoryId)
-        : [...prev.selectedCategories, categoryId],
-    }));
-    setCurrentPage(1);
-  };
-
-  const handleManufacturerToggle = (manufacturerId: string) => {
-    setFilters((prev) => ({
-      ...prev,
-      selectedManufacturers: prev.selectedManufacturers.includes(manufacturerId)
-        ? prev.selectedManufacturers.filter((id) => id !== manufacturerId)
-        : [...prev.selectedManufacturers, manufacturerId],
+        ? []
+        : [categoryId],
     }));
     setCurrentPage(1);
   };
@@ -143,29 +214,16 @@ const ProductListPage = () => {
   const handleColorToggle = (colorId: string) => {
     setFilters((prev) => ({
       ...prev,
-      selectedColors: prev.selectedColors.includes(colorId)
-        ? prev.selectedColors.filter((id) => id !== colorId)
-        : [...prev.selectedColors, colorId],
+      selectedColors: prev.selectedColors.includes(colorId) ? [] : [colorId],
     }));
     setCurrentPage(1);
   };
 
-  const handleTagToggle = (tag: string) => {
+  const handleSizeToggle = (sizeId: string) => {
     setFilters((prev) => ({
       ...prev,
-      selectedTags: prev.selectedTags.includes(tag)
-        ? prev.selectedTags.filter((t) => t !== tag)
-        : [...prev.selectedTags, tag],
+      selectedSizes: prev.selectedSizes.includes(sizeId) ? [] : [sizeId],
     }));
-    setCurrentPage(1);
-  };
-
-  const handleViewModeChange = (mode: ViewMode) => {
-    setViewMode(mode);
-  };
-
-  const handleSortChange = (option: SortOption) => {
-    setSortOption(option);
     setCurrentPage(1);
   };
 
@@ -184,14 +242,14 @@ const ProductListPage = () => {
             <div className="row">
               <div className="col-lg-3 col-md-12">
                 <ProductSidebar
-                  filterOptions={mockFilterOptions}
+                  filterOptions={filterOptions}
                   filters={filters}
+                  priceRangeInput={priceRangeInput}
                   onPriceChange={handlePriceChange}
                   onPriceFilter={handlePriceFilter}
                   onCategoryToggle={handleCategoryToggle}
-                  onManufacturerToggle={handleManufacturerToggle}
                   onColorToggle={handleColorToggle}
-                  onTagToggle={handleTagToggle}
+                  onSizeToggle={handleSizeToggle}
                 />
               </div>
 
@@ -201,32 +259,44 @@ const ProductListPage = () => {
                 </div>
 
                 <ProductToolbar
-                  viewMode={viewMode}
-                  onViewModeChange={handleViewModeChange}
-                  sortOption={sortOption}
-                  onSortChange={handleSortChange}
-                  totalProducts={sortedProducts.length}
+                  totalProducts={total}
                   currentStart={currentStart}
                   currentEnd={currentEnd}
                 />
 
-                <div
-                  className={`row shop_wrapper ${viewMode === "list" ? "list_view" : ""}`}
-                >
-                  {paginatedProducts.map((product) => (
-                    <ProductCard
-                      key={product.id}
-                      product={product}
-                      viewMode={viewMode}
-                    />
-                  ))}
-                </div>
+                {isLoading ? (
+                  <div className="text-center py-10">
+                    <p>Đang tải sản phẩm...</p>
+                  </div>
+                ) : error ? (
+                  <div className="text-center py-10">
+                    <p className="text-red-500">
+                      Có lỗi xảy ra khi tải danh sách sản phẩm
+                    </p>
+                  </div>
+                ) : products.length === 0 ? (
+                  <div className="text-center py-10">
+                    <p>Không tìm thấy sản phẩm nào</p>
+                  </div>
+                ) : (
+                  <>
+                    <div className="row shop_wrapper">
+                      {products.map((product) => (
+                        <ProductCard
+                          key={product.id}
+                          product={product}
+                          viewMode="grid-3"
+                        />
+                      ))}
+                    </div>
 
-                <Pagination
-                  currentPage={currentPage}
-                  totalPages={totalPages}
-                  onPageChange={handlePageChange}
-                />
+                    <Pagination
+                      currentPage={currentPage}
+                      totalPages={totalPages}
+                      onPageChange={handlePageChange}
+                    />
+                  </>
+                )}
               </div>
             </div>
           </div>

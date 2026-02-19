@@ -1,5 +1,6 @@
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
+import { formatVND } from "../../../../utils/currency";
 
 interface PriceFilterProps {
   min: number;
@@ -51,7 +52,7 @@ const PriceFilter = ({
           type="text"
           name="text"
           id="amount"
-          value={`£${value[0]} - £${value[1]}`}
+          value={`${formatVND(value[0])} - ${formatVND(value[1])}`}
           readOnly
         />
       </form>

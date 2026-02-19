@@ -201,7 +201,7 @@ const Header = () => {
 
           <div id="menu" className="text-left">
             <ul className="offcanvas_main_menu">
-              <li className="menu-item-has-children active">
+              <li className="menu-item-has-children">
                 <a href="#">Home</a>
                 <ul className="sub-menu">
                   <li>
@@ -581,11 +581,15 @@ const Header = () => {
                   <div className="main_menu">
                     <nav>
                       <ul>
-                        <li className="active">
-                          <NavLink to="/">Home</NavLink>
+                        <li>
+                          <NavLink to="/" className={({ isActive }) => (isActive ? "active" : "")}>
+                            Home
+                          </NavLink>
                         </li>
                         <li>
-                          <NavLink to="/products">Products</NavLink>
+                          <NavLink to="/products" className={({ isActive }) => (isActive ? "active" : "")}>
+                            Products
+                          </NavLink>
                         </li>
                         <li>
                           <a href="about.html">About Us</a>

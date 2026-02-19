@@ -1,85 +1,57 @@
-import type { ViewMode, SortOption } from "../../types/product.types";
-
 interface ProductToolbarProps {
-  viewMode: ViewMode;
-  onViewModeChange: (mode: ViewMode) => void;
-  sortOption: SortOption;
-  onSortChange: (option: SortOption) => void;
   totalProducts: number;
   currentStart: number;
   currentEnd: number;
+  searchQuery?: string;
+  onClearSearch?: () => void;
 }
 
 const ProductToolbar = ({
-  viewMode,
-  onViewModeChange,
-  sortOption,
-  onSortChange,
   totalProducts,
   currentStart,
   currentEnd,
+  searchQuery,
+  onClearSearch,
 }: ProductToolbarProps) => {
   return (
     <div className="shop_toolbar_wrapper">
-      {/* <div className="shop_toolbar_btn">
-        <button
-          data-role="grid_3"
-          type="button"
-          className={`btn-grid-3 ${viewMode === "grid-3" ? "active" : ""}`}
-          data-toggle="tooltip"
-          title="3"
-          onClick={() => onViewModeChange("grid-3")}
-        ></button>
-
-        <button
-          data-role="grid_4"
-          type="button"
-          className={`btn-grid-4 ${viewMode === "grid-4" ? "active" : ""}`}
-          data-toggle="tooltip"
-          title="4"
-          onClick={() => onViewModeChange("grid-4")}
-        ></button>
-
-        <button
-          data-role="grid_5"
-          type="button"
-          className={`btn-grid-5 ${viewMode === "grid-5" ? "active" : ""}`}
-          data-toggle="tooltip"
-          title="5"
-          onClick={() => onViewModeChange("grid-5")}
-        ></button>
-
-        <button
-          data-role="grid_list"
-          type="button"
-          className={`btn-list ${viewMode === "list" ? "active" : ""}`}
-          data-toggle="tooltip"
-          title="List"
-          onClick={() => onViewModeChange("list")}
-        ></button>
-      </div>
-      <div className="niceselect_option">
-        <form className="select_option" action="#">
-          <select
-            name="orderby"
-            id="short"
-            value={sortOption}
-            onChange={(e) => onSortChange(e.target.value as SortOption)}
-          >
-            <option value="rating">Sort by average rating</option>
-            <option value="popularity">Sort by popularity</option>
-            <option value="newness">Sort by newness</option>
-            <option value="price-low">Sort by price: low to high</option>
-            <option value="price-high">Sort by price: high to low</option>
-            <option value="name">Product Name: A-Z</option>
-          </select>
-        </form>
-      </div> */}
       <div className="page_amount">
         <p>
           Showing {currentStart}–{currentEnd} of {totalProducts} results
         </p>
       </div>
+      {searchQuery && (
+        <div className="search_results_info" style={{ display: 'flex', alignItems: 'center', gap: '10px', marginTop: '10px' }}>
+          <p style={{ margin: 0, fontSize: '14px', color: '#333' }}>
+            Kết quả tìm kiếm cho: <strong>"{searchQuery}"</strong>
+          </p>
+          {onClearSearch && (
+            <button
+              onClick={onClearSearch}
+              className="clear_search_btn"
+              style={{
+                padding: '6px 16px',
+                backgroundColor: '#f84b4b',
+                color: '#fff',
+                border: 'none',
+                borderRadius: '4px',
+                cursor: 'pointer',
+                fontSize: '13px',
+                fontWeight: '500',
+                transition: 'all 0.3s ease',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '5px'
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#d63a3a'}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#f84b4b'}
+            >
+              <i className="ion-android-close" style={{ fontSize: '16px' }}></i>
+              Xóa tìm kiếm
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 };

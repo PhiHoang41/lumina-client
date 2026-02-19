@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import SearchForm from "../components/SearchForm";
 
 const Header = () => {
   const [isOffcanvasOpen, setIsOffcanvasOpen] = useState(false);
@@ -103,27 +104,7 @@ const Header = () => {
           </div>
 
           <div className="search_bar">
-            <form action="#">
-              <select className="select_option" name="select" id="categori">
-                <option selected value="1">
-                  All Categories
-                </option>
-                <option value="2">Accessories</option>
-                <option value="3">Bridge</option>
-                <option value="4">Hub</option>
-                <option value="5">Repeater</option>
-                <option value="6">Switch</option>
-                <option value="7">Video Games</option>
-                <option value="8">PlayStation 3</option>
-                <option value="9">PlayStation 4</option>
-                <option value="10">Xbox 360</option>
-                <option value="11">Xbox One</option>
-              </select>
-              <input placeholder="Search entire store here..." type="text" />
-              <button type="submit">
-                <i className="ion-ios-search-strong"></i>
-              </button>
-            </form>
+            <SearchForm showCategorySelect={true} />
           </div>
 
           <div className="cart_area">
@@ -201,7 +182,7 @@ const Header = () => {
 
           <div id="menu" className="text-left">
             <ul className="offcanvas_main_menu">
-              <li className="menu-item-has-children active">
+              <li className="menu-item-has-children">
                 <a href="#">Home</a>
                 <ul className="sub-menu">
                   <li>
@@ -444,15 +425,7 @@ const Header = () => {
               <div className="row align-items-center">
                 <div className="col-lg-4">
                   <div className="search_bar">
-                    <form action="#">
-                      <input
-                        placeholder="Search entire store here..."
-                        type="text"
-                      />
-                      <button type="submit">
-                        <i className="ion-ios-search-strong"></i>
-                      </button>
-                    </form>
+                    <SearchForm showCategorySelect={false} />
                   </div>
                 </div>
                 <div className="col-lg-4">
@@ -581,11 +554,15 @@ const Header = () => {
                   <div className="main_menu">
                     <nav>
                       <ul>
-                        <li className="active">
-                          <NavLink to="/">Home</NavLink>
+                        <li>
+                          <NavLink to="/" className={({ isActive }) => (isActive ? "active" : "")}>
+                            Home
+                          </NavLink>
                         </li>
                         <li>
-                          <NavLink to="/products">Products</NavLink>
+                          <NavLink to="/products" className={({ isActive }) => (isActive ? "active" : "")}>
+                            Products
+                          </NavLink>
                         </li>
                         <li>
                           <a href="about.html">About Us</a>

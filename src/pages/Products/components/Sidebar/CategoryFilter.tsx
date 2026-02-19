@@ -32,7 +32,7 @@ const CategoryFilter = ({
                   : "inherit",
               }}
             >
-              {category.name} <span>{category.count}</span>
+              {category.name}
             </a>
           </li>
         ))}

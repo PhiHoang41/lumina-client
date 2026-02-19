@@ -1,5 +1,6 @@
 import { useState, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import type { FilterState } from "./types/product.types";
 import type { Product } from "../../services/productService";
 import Breadcrumb from "./components/Breadcrumb";
@@ -13,6 +14,10 @@ import categoryService from "../../services/categoryService";
 const ITEMS_PER_PAGE = 9;
 
 const ProductListPage = () => {
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const searchQuery = searchParams.get('search') || '';
+
   const [currentPage, setCurrentPage] = useState(1);
   const [priceRangeInput, setPriceRangeInput] = useState<[number, number]>([
     0, 10000000,
@@ -72,6 +77,10 @@ const ProductListPage = () => {
       isActive: true,
     };
 
+    if (searchQuery) {
+      params.search = searchQuery;
+    }
+
     if (filters.priceRange[0] > 0) {
       params.minPrice = filters.priceRange[0];
     }
@@ -92,7 +101,7 @@ const ProductListPage = () => {
     }
 
     return params;
-  }, [filters, currentPage]);
+  }, [filters, currentPage, searchQuery]);
 
   const {
     data: productsData,
@@ -232,6 +241,13 @@ const ProductListPage = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const handleClearSearch = () => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.delete('search');
+    const queryString = params.toString();
+    navigate(`/products${queryString ? '?' + queryString : ''}`);
+  };
+
   return (
     <>
       <Breadcrumb />
@@ -262,6 +278,8 @@ const ProductListPage = () => {
                   totalProducts={total}
                   currentStart={currentStart}
                   currentEnd={currentEnd}
+                  searchQuery={searchQuery}
+                  onClearSearch={handleClearSearch}
                 />
 
                 {isLoading ? (

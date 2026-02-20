@@ -1,13 +1,45 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { toast } from "react-toastify";
 import SearchForm from "../components/SearchForm";
+import { isAuthenticated } from "../utils/token";
+import authService from "../services/authService";
+import { useAuth } from "../hooks/useAuth";
 
 const Header = () => {
   const [isOffcanvasOpen, setIsOffcanvasOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const { user } = useAuth();
 
-  const toggleDropdown = (dropdown: string | null) => {
+  const toggleDropdown = (dropdown: string) => {
     setActiveDropdown(activeDropdown === dropdown ? null : dropdown);
+  };
+
+  const closeDropdown = () => {
+    setActiveDropdown(null);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (!target.closest(".top_links, .currency, .language")) {
+        closeDropdown();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const handleLogout = () => {
+    authService.logout();
+    toast.success("Đăng xuất thành công!");
+
+    setTimeout(() => {
+      window.location.href = "/";
+    }, 1500);
   };
 
   return (
@@ -46,13 +78,44 @@ const Header = () => {
 
           <div className="top_right">
             <ul>
-              <li>
-                <Link to="/login">Login</Link>
-              </li>
-              <li>/</li>
-              <li>
-                <Link to="/register">Register</Link>
-              </li>
+              {isAuthenticated() ? (
+                <li className="top_links">
+                  <a
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      toggleDropdown("user");
+                    }}
+                  >
+                    Hi, {user?.fullName || "User"} <i className="ion-chevron-down"></i>
+                  </a>
+                  <ul
+                    className={`dropdown_links ${activeDropdown === "user" ? "open" : ""}`}
+                  >
+                    <li>
+                      <a
+                        href="#"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleLogout();
+                        }}
+                      >
+                        Logout
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+              ) : (
+                <>
+                  <li>
+                    <Link to="/login">Login</Link>
+                  </li>
+                  <li>/</li>
+                  <li>
+                    <Link to="/register">Register</Link>
+                  </li>
+                </>
+              )}
               <li className="language">
                 <a
                   href="#"
@@ -65,7 +128,7 @@ const Header = () => {
                   <i className="ion-chevron-down"></i>
                 </a>
                 <ul
-                  className={`dropdown_language ${activeDropdown === "language" ? "show" : ""}`}
+                  className={`dropdown_language ${activeDropdown === "language" ? "open" : ""}`}
                 >
                   <li>
                     <a href="#">
@@ -90,7 +153,7 @@ const Header = () => {
                   USD <i className="ion-chevron-down"></i>
                 </a>
                 <ul
-                  className={`dropdown_currency ${activeDropdown === "currency" ? "show" : ""}`}
+                  className={`dropdown_currency ${activeDropdown === "currency" ? "open" : ""}`}
                 >
                   <li>
                     <a href="#">EUR</a>
@@ -110,13 +173,44 @@ const Header = () => {
           <div className="cart_area">
             <div className="middel_links">
               <ul>
-                <li>
-                  <Link to="/login">Login</Link>
-                </li>
-                <li>/</li>
-                <li>
-                  <Link to="/register">Register</Link>
-                </li>
+                {isAuthenticated() ? (
+                  <li className="top_links">
+                    <a
+                      href="#"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        toggleDropdown("user2");
+                      }}
+                    >
+                      Hi, {user?.fullName || "User"}<i className="ion-chevron-down"></i>
+                    </a>
+                    <ul
+                      className={`dropdown_links ${activeDropdown === "user2" ? "open" : ""}`}
+                    >
+                      <li>
+                        <a
+                          href="#"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            handleLogout();
+                          }}
+                        >
+                          Logout
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                ) : (
+                  <>
+                    <li>
+                      <Link to="/login">Login</Link>
+                    </li>
+                    <li>/</li>
+                    <li>
+                      <Link to="/register">Register</Link>
+                    </li>
+                  </>
+                )}
               </ul>
             </div>
             <div className="cart_link">
@@ -404,13 +498,44 @@ const Header = () => {
               <div className="col-lg-5 col-md-12">
                 <div className="top_right text-right">
                   <ul>
-                    <li>
-                      <Link to="/login">Login</Link>
-                    </li>
-                    <li>/</li>
-                    <li>
-                      <Link to="/register">Register</Link>
-                    </li>
+                    {isAuthenticated() ? (
+                      <li className="top_links">
+                        <a
+                          href="#"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            toggleDropdown("user3");
+                          }}
+                        >
+                          Hi, {user?.fullName || "User"} <i className="ion-chevron-down"></i>
+                        </a>
+                        <ul
+                          className={`dropdown_links ${activeDropdown === "user3" ? "open" : ""}`}
+                        >
+                          <li>
+                            <a
+                              href="#"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                handleLogout();
+                              }}
+                            >
+                              Logout
+                            </a>
+                          </li>
+                        </ul>
+                      </li>
+                    ) : (
+                      <>
+                        <li>
+                          <Link to="/login">Login</Link>
+                        </li>
+                        <li>/</li>
+                        <li>
+                          <Link to="/register">Register</Link>
+                        </li>
+                      </>
+                    )}
                   </ul>
                 </div>
               </div>
@@ -555,12 +680,22 @@ const Header = () => {
                     <nav>
                       <ul>
                         <li>
-                          <NavLink to="/" className={({ isActive }) => (isActive ? "active" : "")}>
+                          <NavLink
+                            to="/"
+                            className={({ isActive }) =>
+                              isActive ? "active" : ""
+                            }
+                          >
                             Home
                           </NavLink>
                         </li>
                         <li>
-                          <NavLink to="/products" className={({ isActive }) => (isActive ? "active" : "")}>
+                          <NavLink
+                            to="/products"
+                            className={({ isActive }) =>
+                              isActive ? "active" : ""
+                            }
+                          >
                             Products
                           </NavLink>
                         </li>

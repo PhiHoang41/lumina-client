@@ -8,8 +8,7 @@ import RelatedProducts from "./components/RelatedProducts";
 import { mockProductDetails, relatedProducts } from "./data/mockProductDetails";
 
 const ProductDetailsPage = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { slug } = useParams<{ slug: string }>();
+  const { slug: _slug } = useParams<{ slug: string }>();
 
   // In a real app, you would fetch product by slug
   // For now, we'll use the mock data

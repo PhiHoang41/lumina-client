@@ -6,7 +6,7 @@ import type { Product } from "../../services/productService";
 import Breadcrumb from "./components/Breadcrumb";
 import ProductSidebar from "./components/Sidebar/ProductSidebar";
 import ProductToolbar from "./components/ProductList/ProductToolbar";
-import ProductCard from "./components/ProductList/ProductCard";
+import ProductCard from "../../components/ProductCard";
 import Pagination from "./components/ProductList/Pagination";
 import productService from "../../services/productService";
 import categoryService from "../../services/categoryService";

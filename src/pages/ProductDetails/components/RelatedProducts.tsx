@@ -1,11 +1,42 @@
-import { Link } from "react-router-dom";
-import type { RelatedProduct } from "../types/productDetails.types";
+import { useMemo } from "react";
+import ProductCard from "../../../components/ProductCard";
+import type { Product } from "../../../services/productService";
 
 interface RelatedProductsProps {
-  products: RelatedProduct[];
+  products: Product[];
 }
 
 const RelatedProducts = ({ products }: RelatedProductsProps) => {
+  const mappedProducts = useMemo(() => {
+    return products
+      .map((product) => {
+        const variants = product.variants || [];
+        const activeVariants = variants.filter(
+          (v) => v.isActive && v.stock > 0,
+        );
+        const minPrice =
+          activeVariants.length > 0
+            ? Math.min(...activeVariants.map((v) => v.price))
+            : variants.length > 0
+              ? Math.min(...variants.map((v) => v.price))
+              : 0;
+
+        return {
+          id: parseInt(product._id),
+          name: product.name,
+          slug: product.slug,
+          price: minPrice,
+          image: product.images?.[0] || "",
+          description: product.description,
+        };
+      })
+      .filter((p) => p.image);
+  }, [products]);
+
+  if (mappedProducts.length === 0) {
+    return null;
+  }
+
   return (
     <section className="product_section related_product">
       <div className="container">
@@ -22,46 +53,12 @@ const RelatedProducts = ({ products }: RelatedProductsProps) => {
         </div>
         <div className="product_area">
           <div className="row">
-            {products.map((product) => (
-              <div key={product.id} className="col-lg-3 col-md-4 col-sm-6">
-                <div className="single_product">
-                  <div className="product_thumb">
-                    <Link
-                      className="primary_img"
-                      to={`/products/${product.slug}`}
-                    >
-                      <img src={product.image} alt={product.name} />
-                    </Link>
-                    <Link
-                      className="secondary_img"
-                      to={`/products/${product.slug}`}
-                    >
-                      <img src={product.secondaryImage} alt={product.name} />
-                    </Link>
-
-                    {product.salePercent && (
-                      <div className="product_sale">
-                        <span>-{product.salePercent}%</span>
-                      </div>
-                    )}
-                  </div>
-                  <div className="product_content">
-                    <h3>
-                      <Link to={`/products/${product.slug}`}>
-                        {product.name}
-                      </Link>
-                    </h3>
-                    <span className="current_price">
-                      £{product.price.toFixed(2)}
-                    </span>
-                    {product.oldPrice && (
-                      <span className="old_price">
-                        £{product.oldPrice.toFixed(2)}
-                      </span>
-                    )}
-                  </div>
-                </div>
-              </div>
+            {mappedProducts.map((product) => (
+              <ProductCard
+                key={product.id}
+                product={product}
+                viewMode="grid-4"
+              />
             ))}
           </div>
         </div>

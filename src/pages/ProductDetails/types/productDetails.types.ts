@@ -10,12 +10,23 @@ export interface Specification {
   value: string;
 }
 
+export interface ProductVariant {
+  _id: string;
+  size: string;
+  color: string;
+  price: number;
+  stock: number;
+  images: string[];
+  isActive: boolean;
+}
+
 export interface ProductDetails {
   id: number;
   name: string;
   slug: string;
-  price: number;
-  oldPrice?: number;
+  minPrice: number;
+  maxPrice: number;
+  variants: ProductVariant[];
   rating: number;
   reviewCount: number;
   description: string;
@@ -32,8 +43,6 @@ export interface RelatedProduct {
   name: string;
   slug: string;
   price: number;
-  oldPrice?: number;
   image: string;
   secondaryImage: string;
-  salePercent?: number;
 }

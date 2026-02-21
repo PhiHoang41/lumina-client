@@ -44,10 +44,8 @@ export const relatedProducts: RelatedProduct[] = [
     name: "Marshall Portable Bluetooth",
     slug: "marshall-portable-bluetooth",
     price: 60,
-    oldPrice: 86,
     image: "/assets/img/product/product21.jpg",
     secondaryImage: "/assets/img/product/product22.jpg",
-    salePercent: 7,
   },
   {
     id: 27,
@@ -70,9 +68,7 @@ export const relatedProducts: RelatedProduct[] = [
     name: "Beats EP Wired",
     slug: "beats-ep-wired",
     price: 60,
-    oldPrice: 86,
     image: "/assets/img/product/product7.jpg",
     secondaryImage: "/assets/img/product/product8.jpg",
-    salePercent: 7,
   },
 ];

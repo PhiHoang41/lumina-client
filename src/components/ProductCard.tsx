@@ -1,18 +1,27 @@
 import { Link } from "react-router-dom";
-import type { Product, ViewMode } from "../../types/product.types";
-import { formatVND } from "../../../../utils/currency";
+import type { Product } from "../types/product";
+import { formatVND } from "../utils/currency";
 import styles from "./ProductCard.module.css";
+
+export type ViewMode = "grid-3" | "grid-4" | "grid-5" | "list";
 
 interface ProductCardProps {
   product: Product;
-  viewMode: ViewMode;
+  viewMode?: ViewMode;
 }
 
-const ProductCard = ({ product, viewMode }: ProductCardProps) => {
+const ProductCard = ({ product, viewMode = "grid-4" }: ProductCardProps) => {
+  const colClass =
+    viewMode === "grid-3"
+      ? "4"
+      : viewMode === "grid-4"
+        ? "3"
+        : viewMode === "grid-5"
+          ? "2-4"
+          : "12";
+
   return (
-    <div
-      className={`col-lg-${viewMode === "grid-3" ? "4" : viewMode === "grid-4" ? "3" : viewMode === "grid-5" ? "2-4" : "12"} col-md-4 col-12`}
-    >
+    <div className={`col-lg-${colClass} col-md-4 col-12`}>
       <div className={`single_product ${styles.singleProduct}`}>
         <div className={styles.productThumb}>
           <Link className={styles.primaryImg} to={`/products/${product.slug}`}>
@@ -53,9 +62,11 @@ const ProductCard = ({ product, viewMode }: ProductCardProps) => {
           <div className="product_price">
             <span className="current_price">{formatVND(product.price)}</span>
           </div>
-          <div className="product_desc">
-            <p>{product.description}</p>
-          </div>
+          {product.description && (
+            <div className="product_desc">
+              <p>{product.description}</p>
+            </div>
+          )}
         </div>
       </div>
     </div>

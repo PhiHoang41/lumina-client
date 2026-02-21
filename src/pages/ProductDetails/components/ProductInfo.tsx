@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import type { ProductDetails } from "../types/productDetails.types";
 import styles from "./ProductInfo.module.css";
 import { formatVND } from "../../../utils/currency";
@@ -11,6 +11,27 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
   const [quantity, setQuantity] = useState(1);
   const [selectedColor, setSelectedColor] = useState(product.colors[0]);
   const [selectedSize, setSelectedSize] = useState(product.sizes[0]);
+
+  const selectedVariant = useMemo(() => {
+    if (selectedColor === "Choose an option" || selectedSize === "Size") {
+      return null;
+    }
+    return (
+      product.variants.find(
+        (v) => v.color === selectedColor && v.size === selectedSize,
+      ) || null
+    );
+  }, [selectedColor, selectedSize, product.variants]);
+
+  const displayPrice = useMemo(() => {
+    if (selectedVariant) {
+      return formatVND(selectedVariant.price);
+    }
+    if (product.minPrice !== product.maxPrice) {
+      return `${formatVND(product.minPrice)} - ${formatVND(product.maxPrice)}`;
+    }
+    return formatVND(product.minPrice);
+  }, [selectedVariant, product.minPrice, product.maxPrice]);
 
   const handleAddToCart = (e: React.FormEvent) => {
     e.preventDefault();
@@ -45,10 +66,7 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
 
         {/* Price */}
         <div className="product_price">
-          <span className="current_price">{formatVND(product.price)}</span>
-          {product.oldPrice && (
-            <span className="old_price">{formatVND(product.oldPrice)}</span>
-          )}
+          <span className="current_price">{displayPrice}</span>
         </div>
 
         {/* Description */}

@@ -6,9 +6,7 @@ interface ProductTabsProps {
 }
 
 const ProductTabs = ({ product }: ProductTabsProps) => {
-  const [activeTab, setActiveTab] = useState<"info" | "sheet" | "reviews">(
-    "info",
-  );
+  const [activeTab, setActiveTab] = useState<"info" | "reviews">("info");
 
   return (
     <div className="product_d_info">
@@ -33,18 +31,6 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
                   </li>
                   <li>
                     <a
-                      className={activeTab === "sheet" ? "active" : ""}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setActiveTab("sheet");
-                      }}
-                      href="#"
-                    >
-                      Data sheet
-                    </a>
-                  </li>
-                  <li>
-                    <a
                       className={activeTab === "reviews" ? "active" : ""}
                       onClick={(e) => {
                         e.preventDefault();
@@ -64,30 +50,7 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
                 {activeTab === "info" && (
                   <div className="tab-pane fade show active">
                     <div className="product_info_content">
-                      <p>{product.moreInfo}</p>
-                    </div>
-                  </div>
-                )}
-
-                {/* Data Sheet Tab */}
-                {activeTab === "sheet" && (
-                  <div className="tab-pane fade show active">
-                    <div className="product_d_table">
-                      <form action="#">
-                        <table>
-                          <tbody>
-                            {product.specifications.map((spec, index) => (
-                              <tr key={index}>
-                                <td className="first_child">{spec.key}</td>
-                                <td>{spec.value}</td>
-                              </tr>
-                            ))}
-                          </tbody>
-                        </table>
-                      </form>
-                    </div>
-                    <div className="product_info_content">
-                      <p>{product.moreInfo}</p>
+                      <p>{product.description}</p>
                     </div>
                   </div>
                 )}
@@ -95,34 +58,26 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
                 {/* Reviews Tab */}
                 {activeTab === "reviews" && (
                   <div className="tab-pane fade show active">
-                    <div className="product_info_content">
-                      <p>{product.moreInfo}</p>
-                    </div>
-
-                    {/* Display Reviews */}
-                    {product.reviews.map((review, index) => (
-                      <div className="product_info_inner" key={index}>
-                        <div className="product_ratting mb-10">
-                          <ul>
-                            {[...Array(5)].map((_, i) => (
-                              <li key={i}>
-                                <a href="#">
-                                  <i
-                                    className={`fa fa-star${i < review.rating ? "" : "-o"}`}
-                                  ></i>
-                                </a>
-                              </li>
-                            ))}
-                          </ul>
-                          <strong>{review.author}</strong>
-                          <p>{review.date}</p>
-                        </div>
-                        <div className="product_demo">
-                          <strong>review</strong>
-                          <p>{review.comment}</p>
-                        </div>
+                    {/* Hardcoded Review 1 */}
+                    <div className="product_info_inner">
+                      <div className="product_ratting mb-10">
+                        <ul>
+                          {[...Array(5)].map((_, i) => (
+                            <li key={i}>
+                              <a href="#">
+                                <i className={`fa fa-star${i < 5 ? "" : "-o"}`}></i>
+                              </a>
+                            </li>
+                          ))}
+                        </ul>
+                        <strong>Posthemes</strong>
+                        <p>09/07/2018</p>
                       </div>
-                    ))}
+                      <div className="product_demo">
+                        <strong>review</strong>
+                        <p>That's OK!</p>
+                      </div>
+                    </div>
 
                     {/* Review Form */}
                     <div className="product_review_form">

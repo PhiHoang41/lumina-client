@@ -25,9 +25,7 @@ const ProductGallery = ({ images, productName }: ProductGalleryProps) => {
         >
           {images.map((image, index) => (
             <SwiperSlide key={index}>
-              <a href="#">
-                <img src={image} alt={`${productName} - ${index + 1}`} />
-              </a>
+              <img src={image} alt={`${productName} - ${index + 1}`} />
             </SwiperSlide>
           ))}
         </Swiper>
@@ -46,12 +44,13 @@ const ProductGallery = ({ images, productName }: ProductGalleryProps) => {
         >
           {images.map((image, index) => (
             <SwiperSlide key={index}>
-              <a href="#">
-                <img
-                  src={image}
-                  alt={`${productName} thumbnail ${index + 1}`}
-                />
-              </a>
+              <img
+                src={image}
+                alt={`${productName} thumbnail ${index + 1}`}
+                style={{
+                  cursor: "pointer",
+                }}
+              />
             </SwiperSlide>
           ))}
         </Swiper>

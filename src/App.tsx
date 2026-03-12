@@ -6,6 +6,8 @@ import ProductDetailsPage from "./pages/ProductDetails/ProductDetailsPage";
 import CartPage from "./pages/Cart/CartPage";
 import LoginPage from "./pages/Auth/LoginPage";
 import RegisterPage from "./pages/Auth/RegisterPage";
+import AboutPage from "./pages/About/AboutPage";
+import ContactPage from "./pages/Contact/ContactPage";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -36,6 +38,14 @@ const App = () => {
         {
           path: "register",
           element: <RegisterPage />,
+        },
+        {
+          path: "about",
+          element: <AboutPage />,
+        },
+        {
+          path: "contact",
+          element: <ContactPage />,
         },
       ],
     },

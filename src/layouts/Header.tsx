@@ -346,7 +346,7 @@ const Header = () => {
                         <a href="portfolio-details.html">portfolio details</a>
                       </li>
                       <li>
-                        <a href="cart.html">cart</a>
+                        <a href="checkout.html">Checkout</a>
                       </li>
                       <li>
                         <a href="checkout.html">Checkout</a>
@@ -396,7 +396,7 @@ const Header = () => {
                 <a href="#">pages</a>
                 <ul className="sub-menu">
                   <li>
-                    <a href="about.html">About Us</a>
+                    <Link to="/about">About Us</Link>
                   </li>
                   <li>
                     <a href="services.html">services</a>
@@ -405,7 +405,7 @@ const Header = () => {
                     <a href="faq.html">Frequently Questions</a>
                   </li>
                   <li>
-                    <a href="contact.html">contact</a>
+                    <Link to="/contact">contact</Link>
                   </li>
                   <li>
                     <a href="login.html">login</a>
@@ -431,10 +431,10 @@ const Header = () => {
                 <a href="my-account.html">my account</a>
               </li>
               <li className="menu-item-has-children">
-                <a href="about.html">About Us</a>
+                <Link to="/about">About Us</Link>
               </li>
               <li className="menu-item-has-children">
-                <a href="contact.html">Contact Us</a>
+                <Link to="/contact">Contact Us</Link>
               </li>
             </ul>
           </div>
@@ -638,10 +638,24 @@ const Header = () => {
                   <nav>
                     <ul>
                       <li>
-                        <NavLink to="/">Home</NavLink>
+                        <NavLink
+                          to="/"
+                          className={({ isActive }) =>
+                            isActive ? "active" : ""
+                          }
+                        >
+                          Home
+                        </NavLink>
                       </li>
                       <li>
-                        <NavLink to="/products">Products</NavLink>
+                        <NavLink
+                          to="/products"
+                          className={({ isActive }) =>
+                            isActive ? "active" : ""
+                          }
+                        >
+                          Products
+                        </NavLink>
                       </li>
                     </ul>
                   </nav>
@@ -657,10 +671,24 @@ const Header = () => {
                   <nav>
                     <ul>
                       <li>
-                        <a href="about.html">About Us</a>
+                        <NavLink
+                          to="/about"
+                          className={({ isActive }) =>
+                            isActive ? "active" : ""
+                          }
+                        >
+                          About Us
+                        </NavLink>
                       </li>
                       <li>
-                        <a href="contact.html">Contact Us</a>
+                        <NavLink
+                          to="/contact"
+                          className={({ isActive }) =>
+                            isActive ? "active" : ""
+                          }
+                        >
+                          Contact Us
+                        </NavLink>
                       </li>
                     </ul>
                   </nav>
@@ -700,10 +728,24 @@ const Header = () => {
                           </NavLink>
                         </li>
                         <li>
-                          <a href="about.html">About Us</a>
+                          <NavLink
+                            to="/about"
+                            className={({ isActive }) =>
+                              isActive ? "active" : ""
+                            }
+                          >
+                            About Us
+                          </NavLink>
                         </li>
                         <li>
-                          <a href="contact.html">Contact Us</a>
+                          <NavLink
+                            to="/contact"
+                            className={({ isActive }) =>
+                              isActive ? "active" : ""
+                            }
+                          >
+                            Contact Us
+                          </NavLink>
                         </li>
                       </ul>
                     </nav>

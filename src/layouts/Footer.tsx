@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -15,7 +16,7 @@ const Footer = () => {
                   <div className="footer_menu">
                     <ul>
                       <li>
-                        <a href="about.html">About Us</a>
+                        <Link to="/about">About Us</Link>
                       </li>
                       <li>
                         <a href="#">Delivery Information</a>
@@ -27,7 +28,7 @@ const Footer = () => {
                         <a href="#">Terms & Conditions</a>
                       </li>
                       <li>
-                        <a href="contact.html">Contact Us</a>
+                        <Link to="/contact">Contact Us</Link>
                       </li>
                       <li>
                         <a href="#">Returns</a>

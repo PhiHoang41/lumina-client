@@ -11,24 +11,35 @@ import RelatedProducts from "./components/RelatedProducts";
 
 const ProductDetailsPage = () => {
   const { slug } = useParams<{ slug: string }>();
-  const { product: apiProduct, relatedProducts, isLoading, isError } =
-    useProductDetails(slug || "");
+  const {
+    product: apiProduct,
+    relatedProducts,
+    isLoading,
+    isError,
+  } = useProductDetails(slug || "");
 
   const product = useMemo((): ProductDetails | null => {
     if (!apiProduct) return null;
 
     const variants = apiProduct.variants || [];
+    const colorMap = new Map<string, string>();
+    variants.forEach((v) => {
+      if (v.color.name && v.color.hex) {
+        colorMap.set(v.color.name, v.color.hex);
+      }
+    });
     const uniqueColors = Array.from(
       new Set(variants.map((v) => v.color.name)),
     ).filter(Boolean);
-    const uniqueSizes = Array.from(
-      new Set(variants.map((v) => v.size)),
-    ).filter(Boolean);
+    const uniqueSizes = Array.from(new Set(variants.map((v) => v.size))).filter(
+      Boolean,
+    );
 
     const activeVariants = variants.filter((v) => v.isActive && v.stock > 0);
-    const prices = activeVariants.length > 0
-      ? activeVariants.map((v) => v.price)
-      : variants.map((v) => v.price);
+    const prices =
+      activeVariants.length > 0
+        ? activeVariants.map((v) => v.price)
+        : variants.map((v) => v.price);
 
     const minPrice = prices.length > 0 ? Math.min(...prices) : 0;
     const maxPrice = prices.length > 0 ? Math.max(...prices) : minPrice;
@@ -65,13 +76,15 @@ const ProductDetailsPage = () => {
       description: apiProduct.description || "",
       images: allImages,
       colors: ["Choose an option", ...uniqueColors],
+      colorCodes: Object.fromEntries(colorMap),
       sizes: ["Size", ...uniqueSizes],
       specifications: [
         { key: "Compositions", value: "Polyester" },
         { key: "Styles", value: "Girly" },
         { key: "Properties", value: "Short Dress" },
       ],
-      moreInfo: "Fashion has been creating well-designed collections since 2010.",
+      moreInfo:
+        "Fashion has been creating well-designed collections since 2010.",
       reviews: [
         {
           author: "Posthemes",
@@ -118,7 +131,10 @@ const ProductDetailsPage = () => {
         <div className="container">
           <div className="row">
             <div className="col-lg-5 col-md-5">
-              <ProductGallery images={product.images} productName={product.name} />
+              <ProductGallery
+                images={product.images}
+                productName={product.name}
+              />
             </div>
             <div className="col-lg-7 col-md-7">
               <ProductInfo product={product} />

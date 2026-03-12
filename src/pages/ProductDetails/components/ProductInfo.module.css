@@ -1,3 +1,126 @@
+/* Variant Options Container */
+.variantOptions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* Color Button */
+.colorButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+}
+
+.colorButton:hover:not(.disabled) {
+  border-color: #999;
+  transform: translateY(-1px);
+}
+
+.colorButton.selected {
+  border-color: #e65540;
+  background: #fff5f4;
+}
+
+.colorButton.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background: #f5f5f5;
+}
+
+.colorSwatch {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+  display: inline-block;
+}
+
+.colorName {
+  color: #333;
+  font-weight: 500;
+}
+
+/* Size Button */
+.sizeButton {
+  min-width: 48px;
+  height: 40px;
+  padding: 0 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+.sizeButton:hover:not(.disabled) {
+  border-color: #999;
+  transform: translateY(-1px);
+}
+
+.sizeButton.selected {
+  border-color: #e65540;
+  background: #e65540;
+  color: #fff;
+}
+
+.sizeButton.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background: #f5f5f5;
+  color: #999;
+}
+
+/* Stock Info */
+.stockInfo {
+  margin: 15px 0;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.inStock {
+  color: #28a745;
+}
+
+.outOfStock {
+  color: #dc3545;
+}
+
+/* Disabled Add to Cart Button */
+.disabledButton {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: #999 !important;
+  border-color: #999 !important;
+}
+
+.product_variant.quantity input {
+  width: 60px;
+  text-align: center;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+.product_variant.quantity input:focus {
+  outline: none;
+  border-color: #e65540;
+}
+
+/* Custom Select (kept for fallback) */
 .customSelect {
   appearance: none;
   -webkit-appearance: none;

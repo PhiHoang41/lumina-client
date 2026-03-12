@@ -32,6 +32,7 @@ export interface ProductDetails {
   description: string;
   images: string[];
   colors: string[];
+  colorCodes: Record<string, string>;
   sizes: string[];
   specifications: Specification[];
   moreInfo: string;

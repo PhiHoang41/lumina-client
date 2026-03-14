@@ -1,16 +1,44 @@
 import { useState, useMemo, type FormEvent } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 import type { ProductDetails } from "../types/productDetails.types";
 import styles from "./ProductInfo.module.css";
 import { formatVND } from "../../../utils/currency";
+import { isAuthenticated } from "../../../utils/token";
+import cartService from "../../../services/cartService";
+import { queryClient } from "../../../main";
 
 interface ProductInfoProps {
   product: ProductDetails;
+  productId: string;
 }
 
-const ProductInfo = ({ product }: ProductInfoProps) => {
+const ProductInfo = ({ product, productId }: ProductInfoProps) => {
   const [quantity, setQuantity] = useState(1);
   const [selectedColor, setSelectedColor] = useState<string>("");
   const [selectedSize, setSelectedSize] = useState<string>("");
+
+  const addToCartMutation = useMutation({
+    mutationFn: (payload: {
+      productId: string;
+      variantId: string;
+      quantity: number;
+    }) => cartService.addToCart(payload),
+    onSuccess: (data) => {
+      if (data.success) {
+        toast.success("Đã thêm vào giỏ hàng!");
+        queryClient.invalidateQueries({ queryKey: ["cartCount"] });
+        setQuantity(1);
+        setSelectedColor("");
+        setSelectedSize("");
+      }
+    },
+    onError: (error: any) => {
+      toast.error(
+        error.response?.data?.message || "Thêm vào giỏ hàng thất bại",
+      );
+    },
+  });
 
   const actualColors = product.colors.filter((c) => c !== "Choose an option");
   const actualSizes = product.sizes.filter((s) => s !== "Size");
@@ -18,7 +46,7 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
   const isSizeAvailable = (size: string) => {
     if (!selectedColor) return true;
     const variant = product.variants.find(
-      (v) => v.color === selectedColor && v.size === size
+      (v) => v.color === selectedColor && v.size === size,
     );
     if (variant) {
       return variant.stock > 0 && variant.isActive;
@@ -29,7 +57,7 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
   const isColorAvailable = (color: string) => {
     if (!selectedSize) return true;
     const variant = product.variants.find(
-      (v) => v.color === color && v.size === selectedSize
+      (v) => v.color === color && v.size === selectedSize,
     );
     if (variant) {
       return variant.stock > 0 && variant.isActive;
@@ -56,7 +84,7 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
   const currentStock = useMemo(() => {
     if (!selectedColor || !selectedSize) return null;
     const variant = product.variants.find(
-      (v) => v.color === selectedColor && v.size === selectedSize
+      (v) => v.color === selectedColor && v.size === selectedSize,
     );
     return variant || null;
   }, [selectedColor, selectedSize, product.variants]);
@@ -91,17 +119,26 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
     e.preventDefault();
     if (!canAddToCart || !selectedVariant) return;
 
+    if (!isAuthenticated()) {
+      toast.warning("Vui lòng đăng nhập để thêm vào giỏ hàng");
+      return;
+    }
+
     if (!quantity || quantity <= 0) {
-      alert("Please enter a valid quantity");
+      toast.error("Số lượng không hợp lệ");
       return;
     }
 
     if (quantity > selectedVariant.stock) {
-      alert(`Only ${selectedVariant.stock} items available in stock`);
+      toast.error(`Chỉ còn ${selectedVariant.stock} sản phẩm trong kho`);
       return;
     }
 
-    alert(`Added ${quantity} item(s) to cart`);
+    addToCartMutation.mutate({
+      productId,
+      variantId: selectedVariant._id,
+      quantity,
+    });
   };
 
   return (
@@ -143,7 +180,8 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
             {actualColors.map((color) => {
               const isAvailable = isColorAvailable(color);
               const isSelected = selectedColor === color;
-              const colorCode = product.colorCodes[color] || color.toLowerCase();
+              const colorCode =
+                product.colorCodes[color] || color.toLowerCase();
               return (
                 <button
                   key={color}
@@ -192,9 +230,7 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
                 ✓ Còn hàng ({selectedVariant.stock} sản phẩm)
               </span>
             ) : (
-              <span className={styles.outOfStock}>
-                ✗ Hết hàng
-              </span>
+              <span className={styles.outOfStock}>✗ Hết hàng</span>
             )}
           </div>
         )}

@@ -137,7 +137,7 @@ const ProductDetailsPage = () => {
               />
             </div>
             <div className="col-lg-7 col-md-7">
-              <ProductInfo product={product} />
+              <ProductInfo product={product} productId={apiProduct!._id} />
             </div>
           </div>
         </div>

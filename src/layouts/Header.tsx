@@ -1,15 +1,26 @@
 import { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import SearchForm from "../components/SearchForm";
 import { isAuthenticated } from "../utils/token";
 import authService from "../services/authService";
 import { useAuth } from "../hooks/useAuth";
+import cartService from "../services/cartService";
 
 const Header = () => {
   const [isOffcanvasOpen, setIsOffcanvasOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const { user } = useAuth();
+  const isAuth = isAuthenticated();
+
+  const { data: cartCountData } = useQuery({
+    queryKey: ["cartCount"],
+    queryFn: () => cartService.getCartCount(),
+    enabled: isAuth,
+  });
+
+  const cartCount = cartCountData?.itemCount || 0;
 
   const toggleDropdown = (dropdown: string) => {
     setActiveDropdown(activeDropdown === dropdown ? null : dropdown);
@@ -87,7 +98,8 @@ const Header = () => {
                       toggleDropdown("user");
                     }}
                   >
-                    Hi, {user?.fullName || "User"} <i className="ion-chevron-down"></i>
+                    Hi, {user?.fullName || "User"}{" "}
+                    <i className="ion-chevron-down"></i>
                   </a>
                   <ul
                     className={`dropdown_links ${activeDropdown === "user" ? "open" : ""}`}
@@ -182,7 +194,8 @@ const Header = () => {
                         toggleDropdown("user2");
                       }}
                     >
-                      Hi, {user?.fullName || "User"}<i className="ion-chevron-down"></i>
+                      Hi, {user?.fullName || "User"}
+                      <i className="ion-chevron-down"></i>
                     </a>
                     <ul
                       className={`dropdown_links ${activeDropdown === "user2" ? "open" : ""}`}
@@ -213,65 +226,14 @@ const Header = () => {
                 )}
               </ul>
             </div>
-            <div className="cart_link">
-              <a href="#">
-                <i className="fa fa-shopping-basket"></i>2 item(s)
-              </a>
-              <div className="mini_cart">
-                <div className="cart_item top">
-                  <div className="cart_img">
-                    <a href="#">
-                      <img src="/assets/img/s-product/product.jpg" alt="" />
-                    </a>
-                  </div>
-                  <div className="cart_info">
-                    <a href="#">Apple iPhone SE 16GB</a>
-                    <span>1x $60.00</span>
-                  </div>
-                  <div className="cart_remove">
-                    <a href="#">
-                      <i className="ion-android-close"></i>
-                    </a>
-                  </div>
-                </div>
-                <div className="cart_item bottom">
-                  <div className="cart_img">
-                    <a href="#">
-                      <img src="/assets/img/s-product/product2.jpg" alt="" />
-                    </a>
-                  </div>
-                  <div className="cart_info">
-                    <a href="#">Marshall Portable Bluetooth</a>
-                    <span>1x $160.00</span>
-                  </div>
-                  <div className="cart_remove">
-                    <a href="#">
-                      <i className="ion-android-close"></i>
-                    </a>
-                  </div>
-                </div>
-                <div className="cart__table">
-                  <table>
-                    <tbody>
-                      <tr>
-                        <td className="text-left">Sub-Total :</td>
-                        <td className="text-right">$150.00</td>
-                      </tr>
-                      <tr>
-                        <td className="text-left">Total :</td>
-                        <td className="text-right">$184.00</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div className="cart_button view_cart">
-                  <Link to="/cart">View Cart</Link>
-                </div>
-                <div className="cart_button checkout">
-                  <a href="checkout.html">Checkout</a>
-                </div>
+            {isAuth && (
+              <div className="cart_link">
+                <Link to="/cart">
+                  <i className="fa fa-shopping-basket"></i>
+                  {cartCount} item(s)
+                </Link>
               </div>
-            </div>
+            )}
           </div>
 
           <div id="menu" className="text-left">
@@ -507,7 +469,8 @@ const Header = () => {
                             toggleDropdown("user3");
                           }}
                         >
-                          Hi, {user?.fullName || "User"} <i className="ion-chevron-down"></i>
+                          Hi, {user?.fullName || "User"}{" "}
+                          <i className="ion-chevron-down"></i>
                         </a>
                         <ul
                           className={`dropdown_links ${activeDropdown === "user3" ? "open" : ""}`}
@@ -562,71 +525,14 @@ const Header = () => {
                 </div>
                 <div className="col-lg-4">
                   <div className="cart_area">
-                    <div className="cart_link">
-                      <a href="#">
-                        <i className="fa fa-shopping-basket"></i>2 item(s)
-                      </a>
-                      <div className="mini_cart">
-                        <div className="cart_item top">
-                          <div className="cart_img">
-                            <a href="#">
-                              <img
-                                src="/assets/img/s-product/product.jpg"
-                                alt=""
-                              />
-                            </a>
-                          </div>
-                          <div className="cart_info">
-                            <a href="#">Apple iPhone SE 16GB</a>
-                            <span>1x $60.00</span>
-                          </div>
-                          <div className="cart_remove">
-                            <a href="#">
-                              <i className="ion-android-close"></i>
-                            </a>
-                          </div>
-                        </div>
-                        <div className="cart_item bottom">
-                          <div className="cart_img">
-                            <a href="#">
-                              <img
-                                src="/assets/img/s-product/product2.jpg"
-                                alt=""
-                              />
-                            </a>
-                          </div>
-                          <div className="cart_info">
-                            <a href="#">Marshall Portable Bluetooth</a>
-                            <span>1x $160.00</span>
-                          </div>
-                          <div className="cart_remove">
-                            <a href="#">
-                              <i className="ion-android-close"></i>
-                            </a>
-                          </div>
-                        </div>
-                        <div className="cart__table">
-                          <table>
-                            <tbody>
-                              <tr>
-                                <td className="text-left">Sub-Total :</td>
-                                <td className="text-right">$150.00</td>
-                              </tr>
-                              <tr>
-                                <td className="text-left">Total :</td>
-                                <td className="text-right">$184.00</td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                        <div className="cart_button view_cart">
-                          <Link to="/cart">View Cart</Link>
-                        </div>
-                        <div className="cart_button checkout">
-                          <a href="checkout.html">Checkout</a>
-                        </div>
+                    {isAuth && (
+                      <div className="cart_link">
+                        <Link to="/cart">
+                          <i className="fa fa-shopping-basket"></i>
+                          {cartCount > 0 && `${cartCount} item(s)`}
+                        </Link>
                       </div>
-                    </div>
+                    )}
                   </div>
                 </div>
               </div>

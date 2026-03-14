@@ -8,6 +8,7 @@ import LoginPage from "./pages/Auth/LoginPage";
 import RegisterPage from "./pages/Auth/RegisterPage";
 import AboutPage from "./pages/About/AboutPage";
 import ContactPage from "./pages/Contact/ContactPage";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -29,7 +30,11 @@ const App = () => {
         },
         {
           path: "cart",
-          element: <CartPage />,
+          element: (
+            <ProtectedRoute>
+              <CartPage />
+            </ProtectedRoute>
+          ),
         },
         {
           path: "login",

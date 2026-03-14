@@ -61,4 +61,36 @@ export interface CartTotals {
   shipping: number;
   discount: number;
   total: number;
+  appliedCoupon?: AppliedCoupon | null;
+}
+
+export type CouponType = "PERCENTAGE" | "FIXED_AMOUNT";
+
+export interface Coupon {
+  _id: string;
+  code: string;
+  type: CouponType;
+  value: number;
+  minOrderAmount: number;
+  maxDiscountAmount?: number;
+  description?: string;
+}
+
+export interface AppliedCoupon {
+  code: string;
+  type: CouponType;
+  value: number;
+  maxDiscountAmount?: number;
+}
+
+export interface ValidateCouponResponse {
+  success: boolean;
+  message?: string;
+  data?: {
+    code: string;
+    type: CouponType;
+    value: number;
+    discountAmount: number;
+    finalAmount: number;
+  };
 }

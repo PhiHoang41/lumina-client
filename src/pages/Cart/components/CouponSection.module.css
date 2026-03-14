@@ -1,0 +1,49 @@
+.appliedCoupon {
+  background: #d4edda;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.appliedCouponContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.couponCode {
+  font-weight: bold;
+}
+
+.removeButton {
+  background: none;
+  border: none;
+  color: #dc3545;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 4px 8px;
+}
+
+.removeButton:hover {
+  text-decoration: underline;
+}
+
+.inputGroup {
+  display: flex;
+  gap: 10px;
+}
+
+.input {
+  flex: 1;
+}
+
+.applyButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.error {
+  color: #dc3545;
+  margin-top: 10px;
+  font-size: 14px;
+}

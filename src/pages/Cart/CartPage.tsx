@@ -7,16 +7,15 @@ import CartTable from "./components/CartTable";
 import CouponSection from "./components/CouponSection";
 import CartTotals from "./components/CartTotals";
 import cartService, { type CartItem } from "../../services/cartService";
-import type { CartTotals as CartTotalsType } from "./types/cart.types";
-
-const VALID_COUPONS = {
-  SAVE10: 10,
-  SAVE20: 20,
-  FREESHIP: 0,
-};
+import type {
+  CartTotals as CartTotalsType,
+  AppliedCoupon,
+} from "./types/cart.types";
 
 const CartPage = () => {
-  const [appliedCoupon, setAppliedCoupon] = useState<string | null>(null);
+  const [appliedCoupon, setAppliedCoupon] = useState<AppliedCoupon | null>(
+    null,
+  );
 
   const queryClient = useQueryClient();
 
@@ -30,8 +29,11 @@ const CartPage = () => {
   });
 
   const updateCartMutation = useMutation({
-    mutationFn: (payload: { productId: string; variantId: string; quantity: number }) =>
-      cartService.updateCart(payload),
+    mutationFn: (payload: {
+      productId: string;
+      variantId: string;
+      quantity: number;
+    }) => cartService.updateCart(payload),
     onSuccess: (data) => {
       if (data.success) {
         toast.success("Cập nhật giỏ hàng thành công!");
@@ -40,7 +42,9 @@ const CartPage = () => {
       }
     },
     onError: (error: any) => {
-      toast.error(error.response?.data?.message || "Cập nhật giỏ hàng thất bại");
+      toast.error(
+        error.response?.data?.message || "Cập nhật giỏ hàng thất bại",
+      );
     },
   });
 
@@ -56,6 +60,34 @@ const CartPage = () => {
     },
     onError: (error: any) => {
       toast.error(error.response?.data?.message || "Xóa sản phẩm thất bại");
+    },
+  });
+
+  const validateCouponMutation = useMutation({
+    mutationFn: ({
+      code,
+      orderAmount,
+    }: {
+      code: string;
+      orderAmount: number;
+    }) => cartService.validateCoupon(code, orderAmount),
+    onSuccess: (data) => {
+      if (data.success && data.data) {
+        const coupon: AppliedCoupon = {
+          code: data.data.code,
+          type: data.data.type,
+          value: data.data.value,
+        };
+        setAppliedCoupon(coupon);
+        toast.success(`Coupon "${coupon.code}" đã được áp dụng!`);
+      } else {
+        setAppliedCoupon(null);
+      }
+    },
+    onError: (error: any) => {
+      const errorMessage =
+        error.response?.data?.message || "Coupon không hợp lệ!";
+      toast.error(errorMessage);
     },
   });
 
@@ -77,10 +109,21 @@ const CartPage = () => {
 
     let discount = 0;
 
-    if (appliedCoupon && appliedCoupon in VALID_COUPONS) {
-      const discountPercent =
-        VALID_COUPONS[appliedCoupon as keyof typeof VALID_COUPONS];
-      discount = (subtotal * discountPercent) / 100;
+    if (appliedCoupon) {
+      if (appliedCoupon.type === "PERCENTAGE") {
+        discount = (subtotal * appliedCoupon.value) / 100;
+        if (
+          appliedCoupon.maxDiscountAmount &&
+          discount > appliedCoupon.maxDiscountAmount
+        ) {
+          discount = appliedCoupon.maxDiscountAmount;
+        }
+      } else if (appliedCoupon.type === "FIXED_AMOUNT") {
+        discount = appliedCoupon.value;
+        if (discount > subtotal) {
+          discount = subtotal;
+        }
+      }
     }
 
     const total = subtotal - discount;
@@ -90,6 +133,7 @@ const CartPage = () => {
       shipping: 0,
       discount,
       total,
+      appliedCoupon,
     };
   }, [cartItems, appliedCoupon]);
 
@@ -103,7 +147,7 @@ const CartPage = () => {
 
   const handleRemoveItem = (item: CartItem) => {
     const confirmDelete = window.confirm(
-      `Bạn có chắc chắn muốn xóa "${item.product.name}" khỏi giỏ hàng?`
+      `Bạn có chắc chắn muốn xóa "${item.product.name}" khỏi giỏ hàng?`,
     );
     if (!confirmDelete) return;
 
@@ -114,13 +158,18 @@ const CartPage = () => {
   };
 
   const handleApplyCoupon = (code: string) => {
-    const upperCode = code.toUpperCase();
-    if (upperCode in VALID_COUPONS) {
-      setAppliedCoupon(upperCode);
-      toast.success(`Coupon "${upperCode}" đã được áp dụng!`);
-    } else {
-      toast.error("Mã coupon không hợp lệ!");
+    const upperCode = code.toUpperCase().trim();
+    if (upperCode) {
+      const orderAmount = cartItems.reduce(
+        (sum, item) => sum + item.price * item.quantity,
+        0,
+      );
+      validateCouponMutation.mutate({ code: upperCode, orderAmount });
     }
+  };
+
+  const handleRemoveCoupon = () => {
+    setAppliedCoupon(null);
   };
 
   if (isLoading) {
@@ -159,7 +208,7 @@ const CartPage = () => {
 
       <div className="shopping_cart_area">
         <div className="container">
-          <form action="#">
+          <form action="#" onSubmit={(e) => e.preventDefault()}>
             <div className="row">
               <div className="col-12">
                 <CartTable
@@ -174,10 +223,18 @@ const CartPage = () => {
               <div className="coupon_area">
                 <div className="row">
                   <div className="col-lg-6 col-md-6">
-                    <CouponSection onApplyCoupon={handleApplyCoupon} />
+                    <CouponSection
+                      onApplyCoupon={handleApplyCoupon}
+                      onRemoveCoupon={handleRemoveCoupon}
+                      isValidating={validateCouponMutation.isPending}
+                      appliedCoupon={appliedCoupon}
+                    />
                   </div>
                   <div className="col-lg-6 col-md-6">
-                    <CartTotals totals={totals} />
+                    <CartTotals
+                      totals={totals}
+                      onRemoveCoupon={handleRemoveCoupon}
+                    />
                   </div>
                 </div>
               </div>

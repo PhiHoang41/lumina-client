@@ -1,7 +1,7 @@
 import api from "./api";
-import type { Cart, CartItem, CartResponse, CartCountResponse, AddToCartPayload, UpdateCartPayload, RemoveFromCartPayload } from "../pages/Cart/types/cart.types";
+import type { Cart, CartItem, CartResponse, CartCountResponse, AddToCartPayload, UpdateCartPayload, RemoveFromCartPayload, ValidateCouponResponse } from "../pages/Cart/types/cart.types";
 
-export type { Cart, CartItem, CartResponse, CartCountResponse, AddToCartPayload, UpdateCartPayload, RemoveFromCartPayload };
+export type { Cart, CartItem, CartResponse, CartCountResponse, AddToCartPayload, UpdateCartPayload, RemoveFromCartPayload, ValidateCouponResponse };
 
 const cartService = {
   getCart: async (): Promise<CartResponse> => {
@@ -26,6 +26,11 @@ const cartService = {
 
   removeFromCart: async (payload: RemoveFromCartPayload): Promise<CartResponse> => {
     const response = await api.delete<CartResponse>("/cart/remove", { data: payload });
+    return response.data;
+  },
+
+  validateCoupon: async (code: string, orderAmount: number): Promise<ValidateCouponResponse> => {
+    const response = await api.post<ValidateCouponResponse>("/coupons/validate", { code, orderAmount });
     return response.data;
   },
 };

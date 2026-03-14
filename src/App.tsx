@@ -4,6 +4,7 @@ import HomePage from "./pages/Home/HomePage";
 import ProductListPage from "./pages/Products/ProductListPage";
 import ProductDetailsPage from "./pages/ProductDetails/ProductDetailsPage";
 import CartPage from "./pages/Cart/CartPage";
+import CheckoutPage from "./pages/Checkout/CheckoutPage";
 import LoginPage from "./pages/Auth/LoginPage";
 import RegisterPage from "./pages/Auth/RegisterPage";
 import AboutPage from "./pages/About/AboutPage";
@@ -33,6 +34,14 @@ const App = () => {
           element: (
             <ProtectedRoute>
               <CartPage />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "checkout",
+          element: (
+            <ProtectedRoute>
+              <CheckoutPage />
             </ProtectedRoute>
           ),
         },

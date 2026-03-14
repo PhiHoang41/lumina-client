@@ -16,17 +16,17 @@ const CouponSection = ({ onApplyCoupon }: CouponSectionProps) => {
 
   return (
     <div className="coupon_code left">
-      <h3>Coupon</h3>
+      <h3>Mã giảm giá</h3>
       <div className="coupon_inner">
-        <p>Enter your coupon code if you have one.</p>
+        <p>Nhập mã giảm giá nếu bạn có.</p>
         <form onSubmit={handleSubmit}>
           <input
-            placeholder="Coupon code"
+            placeholder="Nhập mã giảm giá"
             type="text"
             value={couponCode}
             onChange={(e) => setCouponCode(e.target.value)}
           />
-          <button type="submit">Apply coupon</button>
+          <button type="submit">Áp dụng</button>
         </form>
       </div>
     </div>

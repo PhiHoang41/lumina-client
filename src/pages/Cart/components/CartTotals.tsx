@@ -1,41 +1,36 @@
 import { Link } from "react-router-dom";
 import type { CartTotals as CartTotalsType } from "../types/cart.types";
+import { formatVND } from "../../../utils/currency";
 
 interface CartTotalsProps {
   totals: CartTotalsType;
 }
 
 const CartTotals = ({ totals }: CartTotalsProps) => {
+
   return (
     <div className="coupon_code right">
-      <h3>Cart Totals</h3>
+      <h3>Tổng giỏ hàng</h3>
       <div className="coupon_inner">
         <div className="cart_subtotal">
-          <p>Subtotal</p>
-          <p className="cart_amount">£{totals.subtotal.toFixed(2)}</p>
-        </div>
-        <div className="cart_subtotal">
-          <p>Shipping</p>
-          <p className="cart_amount">
-            <span>Flat Rate:</span> £{totals.shipping.toFixed(2)}
-          </p>
+          <p>Tạm tính</p>
+          <p className="cart_amount">{formatVND(totals.subtotal)}</p>
         </div>
         {totals.discount > 0 && (
           <div className="cart_subtotal">
-            <p>Discount</p>
+            <p>Giảm giá</p>
             <p className="cart_amount" style={{ color: "#ff4136" }}>
-              -£{totals.discount.toFixed(2)}
+              -{formatVND(totals.discount)}
             </p>
           </div>
         )}
-        <a href="#">Calculate shipping</a>
 
         <div className="cart_subtotal">
-          <p>Total</p>
-          <p className="cart_amount">£{totals.total.toFixed(2)}</p>
+          <p>Tổng cộng</p>
+          <p className="cart_amount">{formatVND(totals.total)}</p>
         </div>
         <div className="checkout_btn">
-          <Link to="/checkout">Proceed to Checkout</Link>
+          <Link to="/checkout">Tiến hành thanh toán</Link>
         </div>
       </div>
     </div>

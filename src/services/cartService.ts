@@ -1,58 +1,7 @@
 import api from "./api";
+import type { Cart, CartItem, CartResponse, CartCountResponse, AddToCartPayload, UpdateCartPayload, RemoveFromCartPayload } from "../pages/Cart/types/cart.types";
 
-export interface CartItem {
-  _id?: string;
-  product: {
-    _id: string;
-    name: string;
-    images: string[];
-  };
-  variant: {
-    _id: string;
-    size?: string;
-    color?: string;
-    price: number;
-    stock?: number;
-  };
-  quantity: number;
-  price: number;
-}
-
-export interface Cart {
-  _id: string | null;
-  user: string;
-  items: CartItem[];
-  totalItems: number;
-  totalPrice: number;
-}
-
-export interface CartResponse {
-  success: boolean;
-  message?: string;
-  cart?: Cart;
-}
-
-export interface CartCountResponse {
-  success: boolean;
-  itemCount: number;
-}
-
-export interface AddToCartPayload {
-  productId: string;
-  variantId: string;
-  quantity: number;
-}
-
-export interface UpdateCartPayload {
-  productId: string;
-  variantId: string;
-  quantity: number;
-}
-
-export interface RemoveFromCartPayload {
-  productId: string;
-  variantId: string;
-}
+export type { Cart, CartItem, CartResponse, CartCountResponse, AddToCartPayload, UpdateCartPayload, RemoveFromCartPayload };
 
 const cartService = {
   getCart: async (): Promise<CartResponse> => {

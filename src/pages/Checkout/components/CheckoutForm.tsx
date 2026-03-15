@@ -94,14 +94,14 @@ const CheckoutForm = () => {
         <h3 className={styles.sectionTitle}>Phương thức thanh toán</h3>
         <div className={styles.paymentOptions}>
           <label className={styles.paymentOption}>
-            <input type="radio" value="cod" {...register("paymentMethod")} />
+            <input type="radio" value="COD" {...register("paymentMethod")} />
             <span className={styles.paymentRadio}></span>
             <span className={styles.paymentLabel}>
               Tiền mặt khi nhận hàng (COD)
             </span>
           </label>
           <label className={styles.paymentOption}>
-            <input type="radio" value="vnpay" {...register("paymentMethod")} />
+            <input type="radio" value="VNPAY" {...register("paymentMethod")} />
             <span className={styles.paymentRadio}></span>
             <span className={styles.paymentLabel}>
               Thanh toán qua VNPay

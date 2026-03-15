@@ -1,7 +1,7 @@
 import api from "./api";
-import type { Cart, CartItem, CartResponse, CartCountResponse, AddToCartPayload, UpdateCartPayload, RemoveFromCartPayload, ValidateCouponResponse } from "../pages/Cart/types/cart.types";
+import type { Cart, CartItem, CartResponse, CartCountResponse, AddToCartPayload, UpdateCartPayload, RemoveFromCartPayload, ValidateCouponResponse, AppliedCoupon } from "../pages/Cart/types/cart.types";
 
-export type { Cart, CartItem, CartResponse, CartCountResponse, AddToCartPayload, UpdateCartPayload, RemoveFromCartPayload, ValidateCouponResponse };
+export type { Cart, CartItem, CartResponse, CartCountResponse, AddToCartPayload, UpdateCartPayload, RemoveFromCartPayload, ValidateCouponResponse, AppliedCoupon };
 
 const cartService = {
   getCart: async (): Promise<CartResponse> => {

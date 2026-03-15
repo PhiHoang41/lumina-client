@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useMemo } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import Breadcrumb from "../../components/Breadcrumb";
@@ -7,25 +7,20 @@ import CartTable from "./components/CartTable";
 import CouponSection from "./components/CouponSection";
 import CartTotals from "./components/CartTotals";
 import cartService, { type CartItem } from "../../services/cartService";
+import { useCart } from "../../contexts/CartContext";
 import type {
   CartTotals as CartTotalsType,
   AppliedCoupon,
 } from "./types/cart.types";
 
 const CartPage = () => {
-  const [appliedCoupon, setAppliedCoupon] = useState<AppliedCoupon | null>(
-    null,
-  );
-
+  const { appliedCoupon, setAppliedCoupon } = useCart();
   const queryClient = useQueryClient();
 
-  const {
-    data: cartData,
-    isLoading,
-    isError,
-  } = useQuery({
+  const { data: cartItems = [], isLoading } = useQuery({
     queryKey: ["cart"],
     queryFn: () => cartService.getCart(),
+    select: (data) => data.cart?.items || [],
   });
 
   const updateCartMutation = useMutation({
@@ -36,15 +31,12 @@ const CartPage = () => {
     }) => cartService.updateCart(payload),
     onSuccess: (data) => {
       if (data.success) {
-        toast.success("Cập nhật giỏ hàng thành công!");
-        queryClient.invalidateQueries({ queryKey: ["cart"] });
-        queryClient.invalidateQueries({ queryKey: ["cartCount"] });
+        queryClient.setQueryData(["cart"], data);
       }
     },
     onError: (error: any) => {
-      toast.error(
-        error.response?.data?.message || "Cập nhật giỏ hàng thất bại",
-      );
+      const message = error.response?.data?.message || "Cập nhật giỏ hàng thất bại";
+      toast.error(message);
     },
   });
 
@@ -53,13 +45,12 @@ const CartPage = () => {
       cartService.removeFromCart(payload),
     onSuccess: (data) => {
       if (data.success) {
-        toast.success("Đã xóa sản phẩm khỏi giỏ hàng!");
-        queryClient.invalidateQueries({ queryKey: ["cart"] });
-        queryClient.invalidateQueries({ queryKey: ["cartCount"] });
+        queryClient.setQueryData(["cart"], data);
       }
     },
     onError: (error: any) => {
-      toast.error(error.response?.data?.message || "Xóa sản phẩm thất bại");
+      const message = error.response?.data?.message || "Xóa sản phẩm thất bại";
+      toast.error(message);
     },
   });
 
@@ -85,16 +76,10 @@ const CartPage = () => {
       }
     },
     onError: (error: any) => {
-      const errorMessage =
-        error.response?.data?.message || "Coupon không hợp lệ!";
-      toast.error(errorMessage);
+      const message = error.response?.data?.message || "Coupon không hợp lệ!";
+      toast.error(message);
     },
   });
-
-  const cartItems: CartItem[] = useMemo(
-    () => cartData?.cart?.items || [],
-    [cartData],
-  );
 
   const breadcrumbItems: BreadcrumbItem[] = [
     { label: "home", path: "/" },
@@ -187,21 +172,6 @@ const CartPage = () => {
     );
   }
 
-  if (isError) {
-    return (
-      <>
-        <Breadcrumb items={breadcrumbItems} />
-        <div className="shopping_cart_area">
-          <div className="container">
-            <div style={{ textAlign: "center", padding: "100px 0" }}>
-              <p>Không thể tải giỏ hàng. Vui lòng thử lại sau.</p>
-            </div>
-          </div>
-        </div>
-      </>
-    );
-  }
-
   return (
     <>
       <Breadcrumb items={breadcrumbItems} />
@@ -234,6 +204,7 @@ const CartPage = () => {
                     <CartTotals
                       totals={totals}
                       onRemoveCoupon={handleRemoveCoupon}
+                      itemCount={cartItems.length}
                     />
                   </div>
                 </div>

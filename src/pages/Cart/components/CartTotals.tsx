@@ -7,9 +7,10 @@ import styles from "./CartTotals.module.css";
 interface CartTotalsProps {
   totals: CartTotalsType;
   onRemoveCoupon?: () => void;
+  itemCount?: number;
 }
 
-const CartTotals = ({ totals, onRemoveCoupon }: CartTotalsProps) => {
+const CartTotals = ({ totals, onRemoveCoupon, itemCount = 0 }: CartTotalsProps) => {
   const { appliedCoupon, subtotal, discount, total } = totals;
 
   const discountLabel = useMemo(() => {
@@ -18,6 +19,8 @@ const CartTotals = ({ totals, onRemoveCoupon }: CartTotalsProps) => {
       ? `Giảm ${appliedCoupon.value}%${appliedCoupon.maxDiscountAmount ? ` (tối đa ${formatVND(appliedCoupon.maxDiscountAmount)})` : ""}`
       : `Giảm ${formatVND(appliedCoupon.value)}`;
   }, [appliedCoupon]);
+
+  const isEmpty = itemCount === 0;
 
   return (
     <div className="coupon_code right">
@@ -65,9 +68,11 @@ const CartTotals = ({ totals, onRemoveCoupon }: CartTotalsProps) => {
           <p>Tổng cộng</p>
           <p className="cart_amount">{formatVND(total)}</p>
         </div>
-        <div className="checkout_btn">
-          <Link to="/checkout">Tiến hành thanh toán</Link>
-        </div>
+        {!isEmpty && (
+          <div className="checkout_btn">
+            <Link to="/checkout">Tiến hành thanh toán</Link>
+          </div>
+        )}
       </div>
     </div>
   );

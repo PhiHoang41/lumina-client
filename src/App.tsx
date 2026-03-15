@@ -9,7 +9,9 @@ import LoginPage from "./pages/Auth/LoginPage";
 import RegisterPage from "./pages/Auth/RegisterPage";
 import AboutPage from "./pages/About/AboutPage";
 import ContactPage from "./pages/Contact/ContactPage";
+import VNPayReturnPage from "./pages/VNPayReturn/VNPayReturnPage";
 import ProtectedRoute from "./components/ProtectedRoute";
+import { CartProvider } from "./contexts/CartContext";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -61,11 +63,19 @@ const App = () => {
           path: "contact",
           element: <ContactPage />,
         },
+        {
+          path: "vnpay-return",
+          element: <VNPayReturnPage />,
+        },
       ],
     },
   ]);
 
-  return <RouterProvider router={router} />;
+  return (
+    <CartProvider>
+      <RouterProvider router={router} />
+    </CartProvider>
+  );
 };
 
 export default App;

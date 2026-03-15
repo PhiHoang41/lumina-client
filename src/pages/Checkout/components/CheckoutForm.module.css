@@ -1,0 +1,162 @@
+.checkoutForm {
+  background: #fff;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.shippingInfo {
+  margin-bottom: 24px;
+}
+
+.formGroup {
+  margin-bottom: 15px;
+}
+
+.formGroup label {
+  display: block;
+  line-height: 18px;
+  color: #242424;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.required {
+  color: #dc3545;
+}
+
+.formGroup input,
+.formGroup select,
+.formGroup textarea {
+  width: 100%;
+  padding: 0 20px;
+  height: 45px;
+  border: 1px solid #ddd;
+  background: #ffffff;
+  color: #747474;
+  border-radius: 4px;
+  transition: border-color 0.2s;
+}
+
+.formGroup input:focus,
+.formGroup select:focus,
+.formGroup textarea:focus {
+  outline: none;
+  border-color: #999;
+}
+
+.formGroup textarea {
+  height: 100px;
+  padding: 10px 20px;
+  resize: none;
+}
+
+.row {
+  margin-left: -10px;
+  margin-right: -10px;
+}
+
+.row > div {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.sectionTitle {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.formGroup {
+  margin-bottom: 20px;
+}
+
+.paymentMethod {
+  margin-top: 32px;
+}
+
+.paymentOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.paymentOption {
+  display: flex;
+  align-items: center;
+  padding: 14px 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.paymentOption:hover {
+  border-color: #999;
+}
+
+.paymentOption.active {
+  border-color: #333;
+  background: #fafafa;
+}
+
+.paymentOption input[type="radio"] {
+  display: none;
+}
+
+.paymentRadio {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  margin-right: 12px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.paymentOption input[type="radio"]:checked + .paymentRadio {
+  border-color: #333;
+}
+
+.paymentOption input[type="radio"]:checked + .paymentRadio::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  background: #333;
+  border-radius: 50%;
+}
+
+.paymentLabel {
+  font-size: 14px;
+  color: #333;
+}
+
+.error {
+  color: #dc3545;
+  font-size: 13px;
+  margin-top: 5px;
+  display: block;
+}
+
+.submitButton {
+  width: 100%;
+  padding: 14px;
+  background: #333;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background 0.2s;
+}
+
+.submitButton:hover {
+  background: #555;
+}

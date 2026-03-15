@@ -27,7 +27,7 @@ const VNPayReturnPage = () => {
 
         if (vnp_ResponseCode === "00" || vnp_TransactionStatus === "00") {
           // Payment successful
-          await orderService.updateOrderStatus(orderId, {
+          await orderService.confirmPayment(orderId, {
             status: "CONFIRMED",
             paymentStatus: "PAID",
             vnpTransactionId: searchParams.get("vnp_TransactionNo") || undefined,
@@ -37,7 +37,7 @@ const VNPayReturnPage = () => {
           toast.success("Thanh toán thành công!");
         } else {
           // Payment failed
-          await orderService.updateOrderStatus(orderId, {
+          await orderService.confirmPayment(orderId, {
             status: "CANCELLED",
             paymentStatus: "UNPAID",
           });

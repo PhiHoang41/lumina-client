@@ -48,23 +48,22 @@ export interface OrderResponse {
   paymentUrl?: string;
 }
 
-export interface UpdateOrderStatusPayload {
-  status?: string;
-  paymentStatus?: string;
-  vnpTransactionId?: string;
-}
-
 const orderService = {
   createOrder: async (payload: CreateOrderPayload): Promise<OrderResponse> => {
     const response = await api.post<OrderResponse>("/orders", payload);
     return response.data;
   },
 
-  updateOrderStatus: async (
+  confirmPayment: async (
     orderId: string,
-    payload: UpdateOrderStatusPayload,
+    payload: { paymentStatus: string; status: string; vnpTransactionId?: string },
   ): Promise<{ success: boolean; message: string; order?: any }> => {
-    const response = await api.put(`/orders/${orderId}/status`, payload);
+    const response = await api.post(`/orders/${orderId}/confirm-payment`, payload);
+    return response.data;
+  },
+
+  cancelOrder: async (orderId: string): Promise<{ success: boolean; message: string; order?: any }> => {
+    const response = await api.put(`/orders/${orderId}/cancel`);
     return response.data;
   },
 };

@@ -7,6 +7,7 @@ import CartPage from "./pages/Cart/CartPage";
 import CheckoutPage from "./pages/Checkout/CheckoutPage";
 import ProfileLayout from "./pages/Profile/components/ProfileLayout";
 import OrdersPage from "./pages/Profile/pages/OrdersPage";
+import OrderDetailPage from "./pages/OrderDetail/OrderDetailPage";
 import AccountPage from "./pages/Profile/pages/AccountPage";
 import PasswordPage from "./pages/Profile/pages/PasswordPage";
 import LoginPage from "./pages/Auth/LoginPage";
@@ -66,6 +67,10 @@ const App = () => {
             {
               path: "orders",
               element: <OrdersPage />,
+            },
+            {
+              path: "orders/:id",
+              element: <OrderDetailPage />,
             },
             {
               path: "account",

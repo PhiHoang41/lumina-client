@@ -17,6 +17,7 @@ interface Order {
   totalPrice: number;
   status: string;
   paymentStatus: string;
+  paymentMethod: string;
 }
 
 const mockOrders: Order[] = [
@@ -38,6 +39,7 @@ const mockOrders: Order[] = [
     totalPrice: 650000,
     status: "DELIVERED",
     paymentStatus: "PAID",
+    paymentMethod: "VNPay",
   },
   {
     _id: "65f2abc1234567890abcd02",
@@ -52,6 +54,7 @@ const mockOrders: Order[] = [
     totalPrice: 890000,
     status: "SHIPPED",
     paymentStatus: "PAID",
+    paymentMethod: "COD",
   },
   {
     _id: "65f2abc1234567890abcd03",
@@ -76,6 +79,7 @@ const mockOrders: Order[] = [
     totalPrice: 450000,
     status: "PROCESSING",
     paymentStatus: "PAID",
+    paymentMethod: "VNPay",
   },
   {
     _id: "65f2abc1234567890abcd04",
@@ -90,6 +94,7 @@ const mockOrders: Order[] = [
     totalPrice: 320000,
     status: "CONFIRMED",
     paymentStatus: "PAID",
+    paymentMethod: "COD",
   },
   {
     _id: "65f2abc1234567890abcd05",
@@ -104,6 +109,7 @@ const mockOrders: Order[] = [
     totalPrice: 280000,
     status: "PENDING",
     paymentStatus: "UNPAID",
+    paymentMethod: "VNPay",
   },
 ];
 
@@ -187,6 +193,7 @@ const OrderList = () => {
               <th>Tổng tiền</th>
               <th>Trạng thái</th>
               <th>Thanh toán</th>
+              <th>Phương thức</th>
               <th>Chi tiết</th>
             </tr>
           </thead>
@@ -228,9 +235,10 @@ const OrderList = () => {
                 <td className={styles.total}>{formatVND(order.totalPrice)}</td>
                 <td>{getStatusBadge(order.status)}</td>
                 <td>{getPaymentBadge(order.paymentStatus)}</td>
+                <td className={styles.paymentMethod}>{order.paymentMethod}</td>
                 <td className={styles.actions}>
                   <Link
-                    to={`/orders/${order._id}`}
+                    to={`/profile/orders/${order._id}`}
                     className={styles.viewBtn}
                   >
                     Xem

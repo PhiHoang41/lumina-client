@@ -1,152 +1,47 @@
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 import "dayjs/locale/vi";
 import { formatVND } from "../../../utils/currency";
+import orderService from "../../../services/orderService";
+import {
+  getOrderStatusInfo,
+  getPaymentStatusInfo,
+  PAYMENT_METHOD_LABELS,
+} from "../../../constants/order";
 import styles from "./OrderList.module.css";
 
 dayjs.locale("vi");
 
-interface Order {
-  _id: string;
-  createdAt: string;
-  products: Array<{
-    product: { name: string };
-    variant: { size: string; color?: { name: string } };
-    quantity: number;
-  }>;
-  totalPrice: number;
-  status: string;
-  paymentStatus: string;
-  paymentMethod: string;
-}
-
-const mockOrders: Order[] = [
-  {
-    _id: "65f2abc1234567890abcd01",
-    createdAt: "2024-03-15T10:30:00Z",
-    products: [
-      {
-        product: { name: "Áo Thun Cotton Basic" },
-        variant: { size: "L", color: { name: "Trắng" } },
-        quantity: 2,
-      },
-      {
-        product: { name: "Quần Jean Slim Fit" },
-        variant: { size: "32" },
-        quantity: 1,
-      },
-    ],
-    totalPrice: 650000,
-    status: "DELIVERED",
-    paymentStatus: "PAID",
-    paymentMethod: "VNPay",
-  },
-  {
-    _id: "65f2abc1234567890abcd02",
-    createdAt: "2024-03-10T14:20:00Z",
-    products: [
-      {
-        product: { name: "Giày Sneaker Classic" },
-        variant: { size: "42", color: { name: "Đen" } },
-        quantity: 1,
-      },
-    ],
-    totalPrice: 890000,
-    status: "SHIPPED",
-    paymentStatus: "PAID",
-    paymentMethod: "COD",
-  },
-  {
-    _id: "65f2abc1234567890abcd03",
-    createdAt: "2024-03-08T09:15:00Z",
-    products: [
-      {
-        product: { name: "Áo Khoác Hoodie" },
-        variant: { size: "XL", color: { name: "Xám" } },
-        quantity: 1,
-      },
-      {
-        product: { name: "Mũ Baseball Cap" },
-        variant: { size: "Free" },
-        quantity: 2,
-      },
-      {
-        product: { name: "Túi Đeo Chéo" },
-        variant: { size: "Free", color: { name: "Nâu" } },
-        quantity: 1,
-      },
-    ],
-    totalPrice: 450000,
-    status: "PROCESSING",
-    paymentStatus: "PAID",
-    paymentMethod: "VNPay",
-  },
-  {
-    _id: "65f2abc1234567890abcd04",
-    createdAt: "2024-03-05T16:45:00Z",
-    products: [
-      {
-        product: { name: "Áo Sơ Mi Oxford" },
-        variant: { size: "M", color: { name: "Xanh navy" } },
-        quantity: 1,
-      },
-    ],
-    totalPrice: 320000,
-    status: "CONFIRMED",
-    paymentStatus: "PAID",
-    paymentMethod: "COD",
-  },
-  {
-    _id: "65f2abc1234567890abcd05",
-    createdAt: "2024-03-01T11:00:00Z",
-    products: [
-      {
-        product: { name: "Quần Short Khaki" },
-        variant: { size: "30" },
-        quantity: 1,
-      },
-    ],
-    totalPrice: 280000,
-    status: "PENDING",
-    paymentStatus: "UNPAID",
-    paymentMethod: "VNPay",
-  },
-];
-
 const OrderList = () => {
-  const orders = mockOrders;
+  const [page, setPage] = useState(1);
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["myOrders", page],
+    queryFn: () => orderService.getMyOrders({ page, limit: 10 }),
+  });
+
+  const orders = data?.data || [];
+  const pagination = data?.pagination;
 
   const getStatusBadge = (status: string) => {
-    const statusMap: Record<string, { class: string; label: string }> = {
-      PENDING: { class: "warning", label: "Chờ xác nhận" },
-      CONFIRMED: { class: "info", label: "Đã xác nhận" },
-      PROCESSING: { class: "info", label: "Đang xử lý" },
-      SHIPPED: { class: "primary", label: "Đã giao vận" },
-      DELIVERED: { class: "success", label: "Đã giao hàng" },
-      CANCELLED: { class: "danger", label: "Đã hủy" },
-    };
-
-    const info = statusMap[status] || { class: "secondary", label: status };
+    const info = getOrderStatusInfo(status);
     const badgeClass =
-      styles[`badge${info.class.charAt(0).toUpperCase() + info.class.slice(1)}`] ||
-      styles.badgeSecondary;
+      styles[
+        `badge${info.class.charAt(0).toUpperCase() + info.class.slice(1)}`
+      ] || styles.badgeSecondary;
     return (
       <span className={`${styles.badge} ${badgeClass}`}>{info.label}</span>
     );
   };
 
   const getPaymentBadge = (paymentStatus: string) => {
-    const statusMap: Record<string, { class: string; label: string }> = {
-      UNPAID: { class: "danger", label: "Chưa thanh toán" },
-      PAID: { class: "success", label: "Đã thanh toán" },
-      FAILED: { class: "danger", label: "Thất bại" },
-    };
-
-    const info =
-      statusMap[paymentStatus] || { class: "secondary", label: paymentStatus };
+    const info = getPaymentStatusInfo(paymentStatus);
     const badgeClass =
-      styles[`badge${info.class.charAt(0).toUpperCase() + info.class.slice(1)}`] ||
-      styles.badgeSecondary;
+      styles[
+        `badge${info.class.charAt(0).toUpperCase() + info.class.slice(1)}`
+      ] || styles.badgeSecondary;
     return (
       <span className={`${styles.badge} ${badgeClass}`}>{info.label}</span>
     );
@@ -155,6 +50,34 @@ const OrderList = () => {
   const formatDate = (dateString: string) => {
     return dayjs(dateString).format("DD/MM/YYYY HH:mm");
   };
+
+  if (isLoading) {
+    return (
+      <div className={styles.orderList}>
+        <div className={styles.header}>
+          <h2 className={styles.title}>Đơn hàng của tôi</h2>
+          <p className={styles.subtitle}>Quản lý và theo dõi đơn hàng</p>
+        </div>
+        <div className={styles.empty}>
+          <p>Đang tải...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className={styles.orderList}>
+        <div className={styles.header}>
+          <h2 className={styles.title}>Đơn hàng của tôi</h2>
+          <p className={styles.subtitle}>Quản lý và theo dõi đơn hàng</p>
+        </div>
+        <div className={styles.empty}>
+          <p className={styles.emptyText}>Lỗi khi tải đơn hàng</p>
+        </div>
+      </div>
+    );
+  }
 
   if (orders.length === 0) {
     return (
@@ -200,25 +123,19 @@ const OrderList = () => {
           <tbody>
             {orders.map((order) => (
               <tr key={order._id}>
-                <td className={styles.orderId}>
-                  #{order._id.slice(-8).toUpperCase()}
-                </td>
+                <td className={styles.orderId}>{order._id}</td>
                 <td className={styles.date}>{formatDate(order.createdAt)}</td>
                 <td>
                   <div className={styles.productList}>
                     {order.products.slice(0, 2).map((item, idx) => (
                       <div key={idx} className={styles.productItem}>
-                        {item.product.name}
-                        {item.variant.color && (
+                        {item.productName}
+                        {item.variantName && (
                           <span className={styles.variantInfo}>
-                            {" - "}
-                            {item.variant.color.name}
+                            {" "}
+                            ({item.variantName})
                           </span>
                         )}
-                        <span className={styles.variantInfo}>
-                          {" "}
-                          ({item.variant.size})
-                        </span>
                         <span className={styles.variantInfo}>
                           {" "}
                           x{item.quantity}
@@ -235,7 +152,9 @@ const OrderList = () => {
                 <td className={styles.total}>{formatVND(order.totalPrice)}</td>
                 <td>{getStatusBadge(order.status)}</td>
                 <td>{getPaymentBadge(order.paymentStatus)}</td>
-                <td className={styles.paymentMethod}>{order.paymentMethod}</td>
+                <td className={styles.paymentMethod}>
+                  {PAYMENT_METHOD_LABELS[order.paymentMethod] || order.paymentMethod}
+                </td>
                 <td className={styles.actions}>
                   <Link
                     to={`/profile/orders/${order._id}`}
@@ -249,6 +168,36 @@ const OrderList = () => {
           </tbody>
         </table>
       </div>
+
+      {pagination && pagination.totalPages > 1 && (
+        <div className={styles.pagination}>
+          <button
+            className={styles.pageBtn}
+            disabled={page === 1}
+            onClick={() => setPage(page - 1)}
+          >
+            &lt;
+          </button>
+          {Array.from({ length: pagination.totalPages }, (_, i) => i + 1).map(
+            (pageNum) => (
+              <button
+                key={pageNum}
+                className={`${styles.pageBtn} ${pageNum === page ? styles.active : ""}`}
+                onClick={() => setPage(pageNum)}
+              >
+                {pageNum}
+              </button>
+            ),
+          )}
+          <button
+            className={styles.pageBtn}
+            disabled={page === pagination.totalPages}
+            onClick={() => setPage(page + 1)}
+          >
+            &gt;
+          </button>
+        </div>
+      )}
     </div>
   );
 };

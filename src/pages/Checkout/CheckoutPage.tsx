@@ -13,6 +13,7 @@ import orderService, {
 import authService from "../../services/authService";
 import { useCart } from "../../contexts/CartContext";
 import styles from "./CheckoutPage.module.css";
+import { queryClient } from "../../main";
 
 interface CheckoutFormData {
   fullName: string;
@@ -86,6 +87,7 @@ const CheckoutPage = () => {
         } else {
           toast.success("Đặt hàng thành công! Cảm ơn bạn đã mua sắm.");
           navigate("/");
+          queryClient.invalidateQueries({ queryKey: ["cartCount"] });
         }
       } else {
         toast.error(response.message || "Đặt hàng thất bại");

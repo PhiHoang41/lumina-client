@@ -1,21 +1,44 @@
-import { useQuery } from "@tanstack/react-query";
-import { useParams, Link } from "react-router-dom";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useParams, Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { formatVND } from "../../utils/currency";
 import orderService from "../../services/orderService";
 import {
   getOrderStatusInfo,
   getPaymentStatusInfo,
   PAYMENT_METHOD_LABELS,
+  ORDER_STATUS,
 } from "../../constants/order";
 import styles from "./OrderDetail.module.css";
 
 const OrderDetailPage = () => {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const [cancelError, setCancelError] = useState<string | null>(null);
 
-  const { data: order, isLoading, error } = useQuery({
+  const {
+    data: order,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ["order", id],
     queryFn: () => orderService.getOrderById(id!),
     enabled: !!id,
+  });
+
+  const cancelMutation = useMutation({
+    mutationFn: () => orderService.cancelOrder(id!),
+    onSuccess: (data) => {
+      if (data.success) {
+        queryClient.invalidateQueries({ queryKey: ["order", id] });
+      } else {
+        setCancelError(data.message);
+      }
+    },
+    onError: () => {
+      setCancelError("Đã xảy ra lỗi khi huỷ đơn hàng");
+    },
   });
 
   const displayData = order?.data;
@@ -90,6 +113,25 @@ const OrderDetailPage = () => {
             {getPaymentBadge(displayData.paymentStatus)}
           </div>
         </div>
+        {(displayData.status === ORDER_STATUS.PENDING ||
+          displayData.status === ORDER_STATUS.CONFIRMED) && (
+          <div className={styles.cancelWrapper}>
+            {cancelError && (
+              <span className={styles.cancelError}>{cancelError}</span>
+            )}
+            <button
+              className={styles.cancelButton}
+              onClick={() => {
+                if (window.confirm("Bạn có chắc chắn muốn huỷ đơn hàng này?")) {
+                  cancelMutation.mutate();
+                }
+              }}
+              disabled={cancelMutation.isPending}
+            >
+              {cancelMutation.isPending ? "Đang huỷ..." : "Huỷ đơn hàng"}
+            </button>
+          </div>
+        )}
       </div>
 
       <div className={styles.content}>

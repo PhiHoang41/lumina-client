@@ -276,6 +276,11 @@
   font-weight: 700;
 }
 
+.discount {
+  color: #28a745;
+  font-weight: 500;
+}
+
 /* Info Box */
 .infoBox {
   font-size: 14px;

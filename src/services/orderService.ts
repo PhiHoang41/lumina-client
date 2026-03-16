@@ -67,6 +67,48 @@ export interface OrderListResponse {
   };
 }
 
+export interface ProductVariant {
+  size: string;
+  color?: {
+    name: string;
+    hex?: string;
+  };
+}
+
+export interface PopulatedProduct {
+  name: string;
+  images: string[];
+}
+
+export interface OrderDetailProduct {
+  product: PopulatedProduct;
+  productName: string;
+  variant: ProductVariant;
+  variantName?: string;
+  quantity: number;
+  price: number;
+}
+
+export interface OrderDetailResponse {
+  success: boolean;
+  data: {
+    _id: string;
+    createdAt: string;
+    products: OrderDetailProduct[];
+    subtotal: number;
+    discountAmount: number;
+    totalPrice: number;
+    coupon?: { code: string };
+    status: string;
+    paymentStatus: string;
+    customerName: string;
+    customerPhone: string;
+    address: string;
+    paymentMethod: string;
+    note?: string;
+  };
+}
+
 const orderService = {
   getMyOrders: async (
     params?: { page?: number; limit?: number; status?: string; sort?: string }
@@ -90,6 +132,11 @@ const orderService = {
 
   cancelOrder: async (orderId: string): Promise<{ success: boolean; message: string; order?: any }> => {
     const response = await api.put(`/orders/${orderId}/cancel`);
+    return response.data;
+  },
+
+  getOrderById: async (orderId: string): Promise<OrderDetailResponse> => {
+    const response = await api.get<OrderDetailResponse>(`/orders/my-orders/${orderId}`);
     return response.data;
   },
 };

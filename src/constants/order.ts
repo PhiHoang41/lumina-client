@@ -32,19 +32,16 @@ export const getOrderStatusInfo = (status: string) => {
 export const PAYMENT_STATUS = {
   UNPAID: "UNPAID",
   PAID: "PAID",
-  FAILED: "FAILED",
 } as const;
 
 export const PAYMENT_STATUS_LABELS: Record<string, string> = {
   UNPAID: "Chưa thanh toán",
   PAID: "Đã thanh toán",
-  FAILED: "Thất bại",
 };
 
 export const PAYMENT_STATUS_CLASS: Record<string, string> = {
   UNPAID: "danger",
   PAID: "success",
-  FAILED: "danger",
 };
 
 export const getPaymentStatusInfo = (status: string) => {

@@ -7,7 +7,9 @@ import styles from "./VNPayReturnPage.module.css";
 const VNPayReturnPage = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const [status, setStatus] = useState<"processing" | "success" | "failed">("processing");
+  const [status, setStatus] = useState<"processing" | "success" | "failed">(
+    "processing",
+  );
 
   useEffect(() => {
     const handleVNPayReturn = async () => {
@@ -30,7 +32,8 @@ const VNPayReturnPage = () => {
           await orderService.confirmPayment(orderId, {
             status: "CONFIRMED",
             paymentStatus: "PAID",
-            vnpTransactionId: searchParams.get("vnp_TransactionNo") || undefined,
+            vnpTransactionId:
+              searchParams.get("vnp_TransactionNo") || undefined,
           });
 
           setStatus("success");
@@ -60,7 +63,7 @@ const VNPayReturnPage = () => {
   };
 
   const handleGoOrders = () => {
-    navigate("/orders");
+    navigate("/profile/orders");
   };
 
   return (
@@ -83,7 +86,10 @@ const VNPayReturnPage = () => {
               <button onClick={handleGoHome} className={styles.primaryButton}>
                 Về trang chủ
               </button>
-              <button onClick={handleGoOrders} className={styles.secondaryButton}>
+              <button
+                onClick={handleGoOrders}
+                className={styles.secondaryButton}
+              >
                 Xem đơn hàng
               </button>
             </div>
@@ -94,12 +100,18 @@ const VNPayReturnPage = () => {
           <>
             <div className={styles.failedIcon}>✕</div>
             <h2>Thanh toán thất bại</h2>
-            <p>Rất tiếc, thanh toán của bạn không thành công. Vui lòng thử lại hoặc liên hệ hỗ trợ.</p>
+            <p>
+              Rất tiếc, thanh toán của bạn không thành công. Vui lòng thử lại
+              hoặc liên hệ hỗ trợ.
+            </p>
             <div className={styles.actions}>
               <button onClick={handleGoHome} className={styles.primaryButton}>
                 Về trang chủ
               </button>
-              <button onClick={() => navigate("/cart")} className={styles.secondaryButton}>
+              <button
+                onClick={() => navigate("/cart")}
+                className={styles.secondaryButton}
+              >
                 Quay lại giỏ hàng
               </button>
             </div>

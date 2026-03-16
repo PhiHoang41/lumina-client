@@ -105,6 +105,9 @@ const Header = () => {
                     className={`dropdown_links ${activeDropdown === "user" ? "open" : ""}`}
                   >
                     <li>
+                      <Link to="/profile">Profile</Link>
+                    </li>
+                    <li>
                       <a
                         href="#"
                         onClick={(e) => {
@@ -200,6 +203,9 @@ const Header = () => {
                     <ul
                       className={`dropdown_links ${activeDropdown === "user2" ? "open" : ""}`}
                     >
+                      <li>
+                        <Link to="/profile">Profile</Link>
+                      </li>
                       <li>
                         <a
                           href="#"
@@ -314,7 +320,7 @@ const Header = () => {
                         <a href="checkout.html">Checkout</a>
                       </li>
                       <li>
-                        <a href="my-account.html">my account</a>
+                        <Link to="/profile">my account</Link>
                       </li>
                     </ul>
                   </li>
@@ -390,7 +396,7 @@ const Header = () => {
                 </ul>
               </li>
               <li className="menu-item-has-children">
-                <a href="my-account.html">my account</a>
+                <Link to="/profile">my account</Link>
               </li>
               <li className="menu-item-has-children">
                 <Link to="/about">About Us</Link>
@@ -475,6 +481,9 @@ const Header = () => {
                         <ul
                           className={`dropdown_links ${activeDropdown === "user3" ? "open" : ""}`}
                         >
+                          <li>
+                            <Link to="/profile">Profile</Link>
+                          </li>
                           <li>
                             <a
                               href="#"

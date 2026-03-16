@@ -1,0 +1,459 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.header {
+  margin-bottom: 24px;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #666;
+  text-decoration: none;
+  font-size: 14px;
+  margin-bottom: 16px;
+  transition: color 0.2s;
+}
+
+.backLink:hover {
+  color: #ff6a28;
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.orderId {
+  font-size: 14px;
+  color: #666;
+  background: #f5f5f5;
+  padding: 4px 12px;
+  border-radius: 4px;
+}
+
+/* Status Section */
+.statusSection {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.statusBadges {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.statusItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.statusLabel {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Content Layout */
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.mainContent {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.sideContent {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Section */
+.section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.sectionTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 16px;
+}
+
+/* Products - Modern Card Style */
+.productList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.productItem {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  background: #fafafa;
+  border-radius: 12px;
+  border: 1px solid #f0f0f0;
+  transition: all 0.2s ease;
+}
+
+.productItem:hover {
+  border-color: #e0e0e0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.productImage {
+  width: 88px;
+  height: 88px;
+  border-radius: 10px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: #fff;
+  border: 1px solid #eee;
+}
+
+.productImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.productItem:hover .productImage img {
+  transform: scale(1.05);
+}
+
+.productInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+
+.productName {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 8px;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.productVariant {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.productVariantItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #fff;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid #e8e8e8;
+}
+
+.colorDot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+}
+
+.productPrice {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.quantity {
+  font-size: 13px;
+  color: #888;
+  background: #fff;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid #e8e8e8;
+}
+
+.price {
+  font-size: 13px;
+  color: #666;
+  font-weight: 500;
+}
+
+.productTotal {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  min-width: 100px;
+  padding-left: 16px;
+  border-left: 1px dashed #e0e0e0;
+}
+
+.productTotalPrice {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.productTotalOriginal {
+  font-size: 12px;
+  color: #999;
+  text-decoration: line-through;
+  margin-top: 2px;
+}
+
+/* Summary - Modern Style */
+.summary {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 12px;
+}
+
+.summaryRow:last-child {
+  margin-bottom: 0;
+}
+
+.totalRow {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #e8e8e8;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.totalRow span:first-child {
+  font-size: 15px;
+}
+
+.totalAmount {
+  font-size: 20px;
+  color: #ff6a28;
+  font-weight: 700;
+}
+
+.discount {
+  color: #28a745;
+  font-weight: 500;
+}
+
+/* Info Box */
+.infoBox {
+  font-size: 14px;
+}
+
+.infoName {
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 8px;
+}
+
+.infoText {
+  color: #666;
+  margin: 0 0 4px;
+  line-height: 1.5;
+}
+
+.infoRow {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.infoRow:last-child {
+  margin-bottom: 0;
+}
+
+.infoLabel {
+  color: #666;
+}
+
+.infoValue {
+  color: #333;
+  font-weight: 500;
+}
+
+/* Info Group - Combined layout */
+.infoGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.infoBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.infoBlockRow {
+  display: flex;
+  gap: 24px;
+}
+
+.infoBlockSmall {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.infoBlockLabel {
+  font-size: 12px;
+  font-weight: 600;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.infoDivider {
+  height: 1px;
+  background: #f0f0f0;
+}
+
+/* Badges */
+.badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.badgeWarning {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.badgeInfo {
+  background: #d1ecf1;
+  color: #0c5460;
+}
+
+.badgeSuccess {
+  background: #d4edda;
+  color: #155724;
+}
+
+.badgeDanger {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.badgePrimary {
+  background: #cce5ff;
+  color: #004085;
+}
+
+.badgeSecondary {
+  background: #e2e3e5;
+  color: #383d41;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .productItem {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .productTotal {
+    flex-direction: row;
+    align-items: center;
+    padding-left: 0;
+    padding-top: 12px;
+    border-left: none;
+    border-top: 1px dashed #e0e0e0;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .infoBlockRow {
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+.cancelButton {
+  padding: 10px 20px;
+  background: #fff;
+  border: 1px solid #dc3545;
+  color: #dc3545;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.cancelButton:hover:not(:disabled) {
+  background: #dc3545;
+  color: #fff;
+}
+
+.cancelWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.cancelError {
+  color: #dc3545;
+  font-size: 12px;
+}
+
+.cancelButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

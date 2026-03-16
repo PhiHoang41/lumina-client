@@ -1,10 +1,15 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
 import HomePage from "./pages/Home/HomePage";
 import ProductListPage from "./pages/Products/ProductListPage";
 import ProductDetailsPage from "./pages/ProductDetails/ProductDetailsPage";
 import CartPage from "./pages/Cart/CartPage";
 import CheckoutPage from "./pages/Checkout/CheckoutPage";
+import ProfileLayout from "./pages/Profile/components/ProfileLayout";
+import OrdersPage from "./pages/Profile/pages/OrdersPage";
+import OrderDetailPage from "./pages/OrderDetail/OrderDetailPage";
+import AccountPage from "./pages/Profile/pages/AccountPage";
+import PasswordPage from "./pages/Profile/pages/PasswordPage";
 import LoginPage from "./pages/Auth/LoginPage";
 import RegisterPage from "./pages/Auth/RegisterPage";
 import AboutPage from "./pages/About/AboutPage";
@@ -46,6 +51,36 @@ const App = () => {
               <CheckoutPage />
             </ProtectedRoute>
           ),
+        },
+        {
+          path: "profile",
+          element: (
+            <ProtectedRoute>
+              <ProfileLayout />
+            </ProtectedRoute>
+          ),
+          children: [
+            {
+              index: true,
+              element: <Navigate to="/profile/orders" replace />,
+            },
+            {
+              path: "orders",
+              element: <OrdersPage />,
+            },
+            {
+              path: "orders/:id",
+              element: <OrderDetailPage />,
+            },
+            {
+              path: "account",
+              element: <AccountPage />,
+            },
+            {
+              path: "password",
+              element: <PasswordPage />,
+            },
+          ],
         },
         {
           path: "login",

@@ -42,10 +42,10 @@ const ContactPage = () => {
               <div className="breadcrumb_content">
                 <ul>
                   <li>
-                    <Link to="/">home</Link>
+                    <Link to="/">Trang chủ</Link>
                   </li>
                   <li>/</li>
-                  <li>contact us</li>
+                  <li>Liên hệ</li>
                 </ul>
               </div>
             </div>
@@ -60,17 +60,14 @@ const ContactPage = () => {
           <div className="row">
             <div className="col-lg-6 col-md-12">
               <div className="contact_message content">
-                <h3>contact us</h3>
+                <h3>Liên hệ</h3>
                 <p>
-                  Claritas est etiam processus dynamicus, qui sequitur mutationem
-                  consuetudium lectorum. Mirum est notare quam littera gothica,
-                  quam nunc putamus parum claram anteposuerit litterarum formas
-                  human. qui sequitur mutationem consuetudium lectorum. Mirum est
-                  notare quam
+                  Chúng tôi luôn sẵn sàng lắng nghe và hỗ trợ bạn. Hãy liên hệ
+                  với chúng tôi nếu bạn có bất kỳ câu hỏi nào.
                 </p>
                 <ul>
                   <li>
-                    <i className="fa fa-fax"></i> Address : No 40 Baria Sreet
+                    <i className="fa fa-fax"></i> Địa chỉ : No 40 Baria Sreet
                     133/2 NewYork City
                   </li>
                   <li>
@@ -85,13 +82,13 @@ const ContactPage = () => {
             </div>
             <div className="col-lg-6 col-md-12">
               <div className="contact_message form">
-                <h3>Tell us your project</h3>
+                <h3>Liên hệ với chúng tôi</h3>
                 <form id="contact-form" method="POST" onSubmit={handleSubmit}>
                   <p>
-                    <label> Your Name (required)</label>
+                    <label> Tên của bạn (bắt buộc)</label>
                     <input
                       name="name"
-                      placeholder="Name *"
+                      placeholder="Tên *"
                       type="text"
                       value={formData.name}
                       onChange={handleChange}
@@ -99,7 +96,7 @@ const ContactPage = () => {
                     />
                   </p>
                   <p>
-                    <label> Your Email (required)</label>
+                    <label> Email của bạn (bắt buộc)</label>
                     <input
                       name="email"
                       placeholder="Email *"
@@ -110,19 +107,19 @@ const ContactPage = () => {
                     />
                   </p>
                   <p>
-                    <label> Subject</label>
+                    <label> Tiêu đề</label>
                     <input
                       name="subject"
-                      placeholder="Subject *"
+                      placeholder="Tiêu đề *"
                       type="text"
                       value={formData.subject}
                       onChange={handleChange}
                     />
                   </p>
                   <div className="contact_textarea">
-                    <label> Your Message</label>
+                    <label> Nội dung tin nhắn</label>
                     <textarea
-                      placeholder="Message *"
+                      placeholder="Nội dung *"
                       name="message"
                       className="form-control2"
                       value={formData.message}
@@ -130,7 +127,7 @@ const ContactPage = () => {
                       required
                     ></textarea>
                   </div>
-                  <button type="submit"> Send</button>
+                  <button type="submit"> Gửi</button>
                   <p className="form-messege"></p>
                 </form>
               </div>

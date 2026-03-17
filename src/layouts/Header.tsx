@@ -277,13 +277,13 @@ const Header = () => {
                 </ul>
               </li>
               <li className="menu-item-has-children">
-                <a href="#">Cửa hàng</a>
+                <a href="#">Sản phẩm</a>
                 <ul className="sub-menu">
                   <li className="menu-item-has-children">
                     <a href="#">Bố cục cửa hàng</a>
                     <ul className="sub-menu">
                       <li>
-                        <a href="shop.html">shop</a>
+                        <a href="shop.html">Cửa hàng</a>
                       </li>
                       <li>
                         <a href="shop-fullwidth.html">Toàn chiều rộng</a>

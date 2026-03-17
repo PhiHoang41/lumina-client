@@ -11,10 +11,10 @@ const AboutPage = () => {
               <div className="breadcrumb_content">
                 <ul>
                   <li>
-                    <Link to="/">home</Link>
+                    <Link to="/">Trang chủ</Link>
                   </li>
                   <li>/</li>
-                  <li>about us</li>
+                  <li>Về chúng tôi</li>
                 </ul>
               </div>
             </div>
@@ -29,21 +29,18 @@ const AboutPage = () => {
           <div className="row">
             <div className="col-lg-6 col-md-12">
               <div className="about_content">
-                <h1>Welcome To Lumina Store!</h1>
+                <h1>Chào mừng đến với Lumina Store!</h1>
                 <p>
-                  Quibusdam perspiciatis pariatur magnam ducimus excepturi error
-                  libero provident animi laboriosam maiores ad explicabo ea
-                  laudantium nostrum dolor distinctio, quas fugiat doloribus,
-                  sit, possimus obcaecati ab quo vel commodi eum. Laudantium
-                  libero, voluptate rerum sunt hic,
+                  Chúng tôi tự hào là điểm đến tin cậy cho những ai yêu thời trang.
+                  Với sứ mệnh mang đến những sản phẩm chất lượng và dịch vụ tốt nhất,
+                  Lumina luôn nỗ lực để đáp ứng mọi nhu cầu của khách hàng.
                 </p>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Esse numquam blanditiis quos, fuga, aspernatur doloribus
-                  expedita, soluta dolore cumque.
+                  Đội ngũ của chúng tôi cam kết mang đến những bộ sưu tập mới nhất,
+                  phù hợp với xu hướng thời trang hiện đại.
                 </p>
                 <div className="view__work">
-                  <a href="#">view work </a>
+                  <a href="#">Xem thêm </a>
                 </div>
               </div>
             </div>
@@ -68,7 +65,7 @@ const AboutPage = () => {
                 </div>
                 <div className="counter_info">
                   <h2 className="counter_number">2170</h2>
-                  <p>happy customers</p>
+                  <p>Khách hàng hài lòng</p>
                 </div>
               </div>
             </div>
@@ -79,7 +76,7 @@ const AboutPage = () => {
                 </div>
                 <div className="counter_info">
                   <h2 className="counter_number">8080</h2>
-                  <p>AWARDS won</p>
+                  <p>Giải thưởng</p>
                 </div>
               </div>
             </div>
@@ -90,7 +87,7 @@ const AboutPage = () => {
                 </div>
                 <div className="counter_info">
                   <h2 className="counter_number">2150</h2>
-                  <p>HOURS WORKED</p>
+                  <p>Giờ làm việc</p>
                 </div>
               </div>
             </div>
@@ -101,7 +98,7 @@ const AboutPage = () => {
                 </div>
                 <div className="counter_info">
                   <h2 className="counter_number">2170</h2>
-                  <p>COMPLETE PROJECTS</p>
+                  <p>Dự án hoàn thành</p>
                 </div>
               </div>
             </div>
@@ -116,7 +113,7 @@ const AboutPage = () => {
           <div className="row align-items-center">
             <div className="col-lg-6 col-md-6">
               <div className="progressbar_inner">
-                <h2>We have Skills to show</h2>
+                <h2>Kỹ năng của chúng tôi</h2>
                 <div className="progress_skill one">
                   <div className="progress">
                     <div

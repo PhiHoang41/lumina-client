@@ -43,10 +43,9 @@ const RelatedProducts = ({ products }: RelatedProductsProps) => {
         <div className="row">
           <div className="col-12">
             <div className="section_title">
-              <h2>Related Products</h2>
+              <h2>Sản phẩm liên quan</h2>
               <p>
-                Contemporary, minimal and modern designs embody the Lavish Alice
-                handwriting
+                Các thiết kế đương đại, tối giản và hiện đại
               </p>
             </div>
           </div>

@@ -58,7 +58,7 @@ const RegisterForm = () => {
 
   return (
     <div className="account_form register">
-      <h2>Register</h2>
+      <h2>Đăng ký</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <p>
           <label>
@@ -76,7 +76,7 @@ const RegisterForm = () => {
         </p>
         <p>
           <label>
-            Email address <span>*</span>
+            Địa chỉ email <span>*</span>
           </label>
           <input
             type="email"
@@ -90,7 +90,7 @@ const RegisterForm = () => {
         </p>
         <p>
           <label>
-            Password <span>*</span>
+            Mật khẩu <span>*</span>
           </label>
           <input
             type="password"
@@ -104,7 +104,7 @@ const RegisterForm = () => {
         </p>
         <p>
           <label>
-            Confirm Password <span>*</span>
+            Xác nhận mật khẩu <span>*</span>
           </label>
           <input
             type="password"
@@ -120,7 +120,7 @@ const RegisterForm = () => {
         </p>
         <div className="login_submit">
           <button type="submit" disabled={registerMutation.isPending}>
-            {registerMutation.isPending ? "Đang đăng ký..." : "Register"}
+            {registerMutation.isPending ? "Đang đăng ký..." : "Đăng ký"}
           </button>
         </div>
       </form>

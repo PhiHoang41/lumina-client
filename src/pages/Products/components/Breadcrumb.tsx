@@ -3,7 +3,7 @@
 import SharedBreadcrumb from "../../../components/Breadcrumb";
 
 const Breadcrumb = () => {
-  const items = [{ label: "home", path: "/" }, { label: "shop" }];
+  const items = [{ label: "Trang chủ", path: "/" }, { label: "Sản phẩm" }];
 
   return <SharedBreadcrumb items={items} />;
 };

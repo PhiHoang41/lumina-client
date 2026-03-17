@@ -13,7 +13,7 @@ const ColorFilter = ({
 }: ColorFilterProps) => {
   return (
     <div className="widget_list widget_categories">
-      <h2>Select By Color</h2>
+      <h2>Lọc theo màu</h2>
       <ul>
         {colors.map((color) => (
           <li key={color.id}>

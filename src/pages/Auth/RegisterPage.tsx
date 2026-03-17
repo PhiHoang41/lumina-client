@@ -5,8 +5,8 @@ import RegisterForm from "./components/RegisterForm";
 
 const RegisterPage = () => {
   const breadcrumbItems: BreadcrumbItem[] = [
-    { label: "home", path: "/" },
-    { label: "register" },
+    { label: "Trang chủ", path: "/" },
+    { label: "Đăng ký" },
   ];
 
   return (
@@ -18,14 +18,14 @@ const RegisterPage = () => {
           <div className="row">
             <div className="col-lg-6 col-md-6">
               <div className="account_form">
-                <h2>Already have an account?</h2>
+                <h2>Bạn đã có tài khoản?</h2>
                 <p>
-                  If you already have an account with us, please login to access
-                  your personalized shopping experience.
+                  Nếu bạn đã có tài khoản, vui lòng đăng nhập để truy cập
+                  trải nghiệm mua sắm cá nhân hóa của bạn.
                 </p>
                 <div className="login_submit">
                   <Link to="/login">
-                    <button type="button">Login to Your Account</button>
+                    <button type="button">Đăng nhập</button>
                   </Link>
                 </div>
               </div>

@@ -13,7 +13,7 @@ const CategoryFilter = ({
 }: CategoryFilterProps) => {
   return (
     <div className="widget_list widget_categories">
-      <h2>Product categories</h2>
+      <h2>Danh mục sản phẩm</h2>
       <ul>
         {categories.map((category) => (
           <li key={category.id}>

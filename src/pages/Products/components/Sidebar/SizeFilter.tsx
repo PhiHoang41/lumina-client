@@ -13,7 +13,7 @@ const SizeFilter = ({
 }: SizeFilterProps) => {
   return (
     <div className="widget_list widget_categories">
-      <h2>Select By Size</h2>
+      <h2>Lọc theo kích thước</h2>
       <ul>
         {sizes.map((size) => (
           <li key={size.id}>

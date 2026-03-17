@@ -39,8 +39,8 @@ const BannerSection = () => {
                 <div className="banner_thumb">
                   <a href="shop.html"><img src="/assets/img/bg/banner11.jpg" alt="#" /></a>
                   <div className="banner_content">
-                    <h1>Handbag <br /> Men's Collection</h1>
-                    <a href="shop.html">Discover Now</a>
+                    <h1>Túi xách <br /> Bộ sưu tập Nam</h1>
+                    <a href="shop.html">Khám phá ngay</a>
                   </div>
                 </div>
               </div>
@@ -50,8 +50,8 @@ const BannerSection = () => {
                 <div className="banner_thumb">
                   <a href="shop.html"><img src="/assets/img/bg/banner12.jpg" alt="#" /></a>
                   <div className="banner_content">
-                    <h1>Sneaker <br /> Men's Collection</h1>
-                    <a href="shop.html">Discover Now</a>
+                    <h1>Giày thể thao <br /> Bộ sưu tập Nam</h1>
+                    <a href="shop.html">Khám phá ngay</a>
                   </div>
                 </div>
               </div>

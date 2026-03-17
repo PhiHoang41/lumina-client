@@ -271,7 +271,7 @@ const ProductListPage = () => {
 
               <div className="col-lg-9 col-md-12">
                 <div className="shop_title">
-                  <h1>shop</h1>
+                  <h1>Sản phẩm</h1>
                 </div>
 
                 <ProductToolbar

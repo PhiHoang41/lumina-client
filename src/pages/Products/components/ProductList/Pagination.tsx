@@ -92,7 +92,7 @@ const Pagination = ({
                     onPageChange(currentPage + 1);
                   }}
                 >
-                  next
+                  Tiếp
                 </a>
               </li>
               <li>

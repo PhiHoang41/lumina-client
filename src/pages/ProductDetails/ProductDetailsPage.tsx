@@ -75,9 +75,9 @@ const ProductDetailsPage = () => {
       reviewCount: 1,
       description: apiProduct.description || "",
       images: allImages,
-      colors: ["Choose an option", ...uniqueColors],
+      colors: ["Chọn một tùy chọn", ...uniqueColors],
       colorCodes: Object.fromEntries(colorMap),
-      sizes: ["Size", ...uniqueSizes],
+      sizes: ["Kích thước", ...uniqueSizes],
       specifications: [
         { key: "Compositions", value: "Polyester" },
         { key: "Styles", value: "Girly" },
@@ -119,7 +119,7 @@ const ProductDetailsPage = () => {
   }
 
   const breadcrumbItems: BreadcrumbItem[] = [
-    { label: "home", path: "/" },
+    { label: "Trang chủ", path: "/" },
     { label: product.name.toLowerCase() },
   ];
 

@@ -40,8 +40,8 @@ const ProductInfo = ({ product, productId }: ProductInfoProps) => {
     },
   });
 
-  const actualColors = product.colors.filter((c) => c !== "Choose an option");
-  const actualSizes = product.sizes.filter((s) => s !== "Size");
+  const actualColors = product.colors.filter((c) => c !== "Chọn một tùy chọn");
+  const actualSizes = product.sizes.filter((s) => s !== "Kích thước");
 
   const isSizeAvailable = (size: string) => {
     if (!selectedColor) return true;
@@ -158,10 +158,10 @@ const ProductInfo = ({ product, productId }: ProductInfoProps) => {
               </li>
             ))}
             <li className="review">
-              <a href="#"> {product.reviewCount} review </a>
+              <a href="#"> {product.reviewCount} đánh giá </a>
             </li>
             <li className="review">
-              <a href="#"> Write a review </a>
+              <a href="#"> Viết đánh giá </a>
             </li>
           </ul>
         </div>
@@ -175,7 +175,7 @@ const ProductInfo = ({ product, productId }: ProductInfoProps) => {
         </div>
 
         <div className="product_variant color">
-          <h3>color</h3>
+          <h3>Màu sắc</h3>
           <div className={styles.variantOptions}>
             {actualColors.map((color) => {
               const isAvailable = isColorAvailable(color);
@@ -202,7 +202,7 @@ const ProductInfo = ({ product, productId }: ProductInfoProps) => {
         </div>
 
         <div className="product_variant size">
-          <h3>size</h3>
+          <h3>Kích thước</h3>
           <div className={styles.variantOptions}>
             {actualSizes.map((size) => {
               const isAvailable = isSizeAvailable(size);
@@ -236,7 +236,7 @@ const ProductInfo = ({ product, productId }: ProductInfoProps) => {
         )}
 
         <div className="product_variant quantity">
-          <label>quantity</label>
+          <label>Số lượng</label>
           <input
             min="1"
             max={currentStock?.stock || 100}
@@ -253,22 +253,22 @@ const ProductInfo = ({ product, productId }: ProductInfoProps) => {
             type="submit"
             disabled={!canAddToCart}
           >
-            add to cart
+Thêm vào giỏ
           </button>
         </div>
 
         <div className="product_d_action">
           <ul>
             <li>
-              <a href="#" title="Add to wishlist">
-                <i className="fa fa-heart-o" aria-hidden="true"></i> Add to Wish
-                List
+              <a href="#" title="Thêm vào wishlist">
+                <i className="fa fa-heart-o" aria-hidden="true"></i> Thêm vào
+                danh sách yêu thích
               </a>
             </li>
             <li>
-              <a href="#" title="Add to Compare">
-                <i className="fa fa-sliders" aria-hidden="true"></i> Compare
-                this Product
+              <a href="#" title="So sánh">
+                <i className="fa fa-sliders" aria-hidden="true"></i> So sánh sản
+                phẩm
               </a>
             </li>
           </ul>
@@ -276,7 +276,7 @@ const ProductInfo = ({ product, productId }: ProductInfoProps) => {
       </form>
 
       <div className="priduct_social">
-        <h3>Share on:</h3>
+        <h3>Chia sẻ:</h3>
         <ul>
           <li>
             <a href="#">

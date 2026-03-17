@@ -14,24 +14,24 @@ const HeroSlider = () => {
       background: "/assets/img/slider/slider4.jpg",
       image: "/assets/img/slider/content3.png",
       description:
-        "the wooboom clothing summer collection is back at half price",
-      buttonText: "Discover Now",
+        "Bộ sưu tập thời trang hè wooboom đã quay trở lại với giá nửa giá",
+      buttonText: "Khám phá ngay",
     },
     {
       id: 2,
       background: "/assets/img/slider/slider5.jpg",
       image: "/assets/img/slider/content4.png",
       description:
-        "the wooboom clothing summer collection is back at half price",
-      buttonText: "Discover Now",
+        "Bộ sưu tập thời trang hè wooboom đã quay trở lại với giá nửa giá",
+      buttonText: "Khám phá ngay",
     },
     {
       id: 3,
       background: "/assets/img/slider/slider6.jpg",
       image: "/assets/img/slider/content5.png",
       description:
-        "the wooboom clothing summer collection is back at half price",
-      buttonText: "Discover Now",
+        "Bộ sưu tập thời trang hè wooboom đã quay trở lại với giá nửa giá",
+      buttonText: "Khám phá ngay",
     },
   ];
 
@@ -94,7 +94,7 @@ const HeroSlider = () => {
       <button
         className={`${styles.navigationButton} ${styles.prevButton}`}
         onClick={handlePrevClick}
-        aria-label="Previous slide"
+        aria-label="Slide trước"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -107,7 +107,7 @@ const HeroSlider = () => {
       <button
         className={`${styles.navigationButton} ${styles.nextButton}`}
         onClick={handleNextClick}
-        aria-label="Next slide"
+        aria-label="Slide tiếp theo"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

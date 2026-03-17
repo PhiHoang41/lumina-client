@@ -19,7 +19,7 @@ const PriceFilter = ({
 }: PriceFilterProps) => {
   return (
     <div className="widget_list widget_filter">
-      <h2>Filter by price</h2>
+      <h2>Lọc theo giá</h2>
       <form
         action="#"
         onSubmit={(e) => {
@@ -47,7 +47,7 @@ const PriceFilter = ({
             }}
           />
         </div>
-        <button type="submit">Filter</button>
+        <button type="submit">Lọc</button>
         <input
           type="text"
           name="text"

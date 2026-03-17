@@ -26,7 +26,7 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
                       }}
                       href="#"
                     >
-                      More info
+                      Thông tin thêm
                     </a>
                   </li>
                   <li>
@@ -38,7 +38,7 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
                       }}
                       href="#"
                     >
-                      Reviews
+                      Đánh giá
                     </a>
                   </li>
                 </ul>
@@ -74,29 +74,29 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
                         <p>09/07/2018</p>
                       </div>
                       <div className="product_demo">
-                        <strong>review</strong>
-                        <p>That's OK!</p>
+                        <strong>đánh giá</strong>
+                        <p>Rất tốt!</p>
                       </div>
                     </div>
 
                     {/* Review Form */}
                     <div className="product_review_form">
                       <form action="#">
-                        <h2>Add a review </h2>
+                        <h2>Thêm đánh giá </h2>
                         <p>
-                          Your email address will not be published. Required
-                          fields are marked{" "}
+                          Địa chỉ email của bạn sẽ không được công khai. Các
+                          trường bắt buộc được đánh dấu{" "}
                         </p>
                         <div className="row">
                           <div className="col-12">
-                            <label htmlFor="review_comment">Your review </label>
+                            <label htmlFor="review_comment">Đánh giá của bạn </label>
                             <textarea
                               name="comment"
                               id="review_comment"
                             ></textarea>
                           </div>
                           <div className="col-lg-6 col-md-6">
-                            <label htmlFor="author">Name</label>
+                            <label htmlFor="author">Tên</label>
                             <input id="author" type="text" />
                           </div>
                           <div className="col-lg-6 col-md-6">
@@ -104,7 +104,7 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
                             <input id="email" type="text" />
                           </div>
                         </div>
-                        <button type="submit">Submit</button>
+                        <button type="submit">Gửi</button>
                       </form>
                     </div>
                   </div>

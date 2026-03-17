@@ -53,11 +53,11 @@ const LoginForm = () => {
 
   return (
     <div className="account_form">
-      <h2>login</h2>
+      <h2>Đăng nhập</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <p>
           <label>
-            Username or email <span>*</span>
+            Tên đăng nhập hoặc email <span>*</span>
           </label>
           <input
             type="text"
@@ -71,7 +71,7 @@ const LoginForm = () => {
         </p>
         <p>
           <label>
-            Passwords <span>*</span>
+            Mật khẩu <span>*</span>
           </label>
           <input
             type="password"
@@ -84,7 +84,7 @@ const LoginForm = () => {
           )}
         </p>
         <div className="login_submit">
-          <a href="#">Lost your password?</a>
+          <a href="#">Quên mật khẩu?</a>
           <label htmlFor="remember">
             <input
               id="remember"
@@ -93,10 +93,10 @@ const LoginForm = () => {
               onChange={(e) => setRememberMe(e.target.checked)}
               disabled={loginMutation.isPending}
             />
-            Remember me
+            Ghi nhớ đăng nhập
           </label>
           <button type="submit" disabled={loginMutation.isPending}>
-            {loginMutation.isPending ? "Đang đăng nhập..." : "login"}
+            {loginMutation.isPending ? "Đang đăng nhập..." : "Đăng nhập"}
           </button>
         </div>
       </form>

@@ -17,7 +17,7 @@ const ProductToolbar = ({
     <div className="shop_toolbar_wrapper">
       <div className="page_amount">
         <p>
-          Showing {currentStart}–{currentEnd} of {totalProducts} results
+          Hiển thị {currentStart}–{currentEnd} của {totalProducts} kết quả
         </p>
       </div>
       {searchQuery && (

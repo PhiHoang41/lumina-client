@@ -12,26 +12,26 @@ const Footer = () => {
             <div className="row">
               <div className="col-lg-2 col-md-6 col-sm-6 col-6">
                 <div className="widgets_container">
-                  <h3>Information</h3>
+                  <h3>Thông tin</h3>
                   <div className="footer_menu">
                     <ul>
                       <li>
-                        <Link to="/about">About Us</Link>
+                        <Link to="/about">Về chúng tôi</Link>
                       </li>
                       <li>
-                        <a href="#">Delivery Information</a>
+                        <a href="#">Thông tin vận chuyển</a>
                       </li>
                       <li>
-                        <a href="privacy-policy.html">Privacy Policy</a>
+                        <a href="privacy-policy.html">Chính sách bảo mật</a>
                       </li>
                       <li>
-                        <a href="#">Terms & Conditions</a>
+                        <a href="#">Điều khoản & Điều kiện</a>
                       </li>
                       <li>
-                        <Link to="/contact">Contact Us</Link>
+                        <Link to="/contact">Liên hệ</Link>
                       </li>
                       <li>
-                        <a href="#">Returns</a>
+                        <a href="#">Đổi trả</a>
                       </li>
                     </ul>
                   </div>
@@ -39,26 +39,26 @@ const Footer = () => {
               </div>
               <div className="col-lg-2 col-md-6 col-sm-6 col-6">
                 <div className="widgets_container">
-                  <h3>Extras</h3>
+                  <h3>Bổ sung</h3>
                   <div className="footer_menu">
                     <ul>
                       <li>
-                        <a href="#">Brands</a>
+                        <a href="#">Thương hiệu</a>
                       </li>
                       <li>
-                        <a href="#">Gift Certificates</a>
+                        <a href="#">Phiếu quà tặng</a>
                       </li>
                       <li>
-                        <a href="#">Affiliate</a>
+                        <a href="#">Liên kết</a>
                       </li>
                       <li>
-                        <a href="#">Specials</a>
+                        <a href="#">Khuyến mãi đặc biệt</a>
                       </li>
                       <li>
-                        <a href="contact.html">Site Map</a>
+                        <a href="contact.html">Sơ đồ trang</a>
                       </li>
                       <li>
-                        <a href="my-account.html">My Account</a>
+                        <a href="my-account.html">Tài khoản của tôi</a>
                       </li>
                     </ul>
                   </div>
@@ -66,14 +66,14 @@ const Footer = () => {
               </div>
               <div className="col-lg-4 col-md-6">
                 <div className="widgets_container contact_us">
-                  <h3>Contact Us</h3>
+                  <h3>Liên hệ</h3>
                   <div className="footer_contact">
                     <p>
-                      Address: 6688 Princess Road, London, Greater London BAS
+                      Địa chỉ: 6688 Đường Princess, London, Greater London BAS
                       23JK, UK
                     </p>
                     <p>
-                      Phone:{" "}
+                      Điện thoại:{" "}
                       <a href="tel:+(+012)800456789-987">
                         (+012) 800 456 789 - 987
                       </a>
@@ -106,11 +106,11 @@ const Footer = () => {
               </div>
               <div className="col-lg-4 col-md-6">
                 <div className="widgets_container newsletter">
-                  <h3>Join Our Newsletter Now</h3>
+                  <h3>Đăng ký nhận tin ngay</h3>
                   <div className="newleter-content">
                     <p>
-                      Exceptional quality. Ethical factories. Sign up to enjoy
-                      free U.S. shipping and returns on your first order.
+                      Chất lượng đặc biệt. Nhà máy đạo đức. Đăng ký để tận hưởng
+                      miễn phí vận chuyển và đổi trả cho đơn hàng đầu tiên.
                     </p>
                     <div className="subscribe_form">
                       <form id="mc-form" className="mc-form footer-newsletter">
@@ -118,9 +118,9 @@ const Footer = () => {
                           id="mc-email"
                           type="email"
                           autoComplete="off"
-                          placeholder="Enter you email address here..."
+                          placeholder="Nhập địa chỉ email của bạn..."
                         />
-                        <button id="mc-submit">Subscribe !</button>
+                        <button id="mc-submit">Đăng ký!</button>
                       </form>
                       <div className="mailchimp-alerts text-centre">
                         <div className="mailchimp-submitting"></div>
@@ -141,7 +141,8 @@ const Footer = () => {
                 <div className="copyright_area">
                   <p>
                     {" "}
-                    &copy; 2021 <strong></strong> Made with ❤️ by{" "}
+                    &copy; {new Date().getFullYear()} <strong>Lumina</strong>{" "}
+                    Tạo bởi{" "}
                     <a
                       href="https://hasthemes.com/"
                       target="_blank"
@@ -156,13 +157,13 @@ const Footer = () => {
                 <div className="footer_custom_links">
                   <ul>
                     <li>
-                      <a href="#">Order History</a>
+                      <a href="#">Lịch sử đơn hàng</a>
                     </li>
                     <li>
-                      <a href="wishlist.html">Wish List</a>
+                      <a href="wishlist.html">Danh sách yêu thích</a>
                     </li>
                     <li>
-                      <a href="#">Newsletter</a>
+                      <a href="#">Bản tin</a>
                     </li>
                   </ul>
                 </div>
@@ -356,7 +357,7 @@ const Footer = () => {
                     <div className="col-lg-7 col-md-7 col-sm-12">
                       <div className="modal_right">
                         <div className="modal_title mb-10">
-                          <h2>Handbag feugiat</h2>
+                          <h2>Túi xách</h2>
                         </div>
                         <div className="modal_price mb-10">
                           <span className="new_price">$64.99</span>
@@ -373,7 +374,7 @@ const Footer = () => {
                         </div>
                         <div className="variants_selects">
                           <div className="variants_size">
-                            <h2>size</h2>
+                            <h2>Kích thước</h2>
                             <select className="select_option">
                               <option selected value="1">
                                 s
@@ -385,7 +386,7 @@ const Footer = () => {
                             </select>
                           </div>
                           <div className="variants_color">
-                            <h2>color</h2>
+                            <h2>Màu sắc</h2>
                             <select className="select_option">
                               <option selected value="1">
                                 purple
@@ -405,12 +406,12 @@ const Footer = () => {
                                 defaultValue={1}
                                 type="number"
                               />
-                              <button type="submit">add to cart</button>
+                              <button type="submit">Thêm vào giỏ</button>
                             </form>
                           </div>
                         </div>
                         <div className="modal_social">
-                          <h2>Share this product</h2>
+                          <h2>Chia sẻ sản phẩm</h2>
                           <ul>
                             <li className="facebook">
                               <a href="#">

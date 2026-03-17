@@ -78,11 +78,11 @@ const Header = () => {
           <div className="welcome_text">
             <ul>
               <li>
-                <span>Free Delivery:</span> Take advantage of our time to save
-                event
+                <span>Miễn phí vận chuyển:</span> Tận dụng cơ hội tiết kiệm của
+                chúng tôi
               </li>
               <li>
-                <span>Free Returns *</span> Satisfaction guaranteed
+                <span>Miễn phí đổi trả *</span> Đảm bảo hài lòng
               </li>
             </ul>
           </div>
@@ -98,14 +98,14 @@ const Header = () => {
                       toggleDropdown("user");
                     }}
                   >
-                    Hi, {user?.fullName || "User"}{" "}
+                    Xin chào, {user?.fullName || "User"}{" "}
                     <i className="ion-chevron-down"></i>
                   </a>
                   <ul
                     className={`dropdown_links ${activeDropdown === "user" ? "open" : ""}`}
                   >
                     <li>
-                      <Link to="/profile">Profile</Link>
+                      <Link to="/profile">Hồ sơ</Link>
                     </li>
                     <li>
                       <a
@@ -115,7 +115,7 @@ const Header = () => {
                           handleLogout();
                         }}
                       >
-                        Logout
+                        Đăng xuất
                       </a>
                     </li>
                   </ul>
@@ -123,11 +123,11 @@ const Header = () => {
               ) : (
                 <>
                   <li>
-                    <Link to="/login">Login</Link>
+                    <Link to="/login">Đăng nhập</Link>
                   </li>
                   <li>/</li>
                   <li>
-                    <Link to="/register">Register</Link>
+                    <Link to="/register">Đăng ký</Link>
                   </li>
                 </>
               )}
@@ -139,7 +139,7 @@ const Header = () => {
                     toggleDropdown("language");
                   }}
                 >
-                  <img src="/assets/img/logo/language.png" alt="" /> English{" "}
+                  <img src="/assets/img/logo/language.png" alt="" /> Tiếng Việt{" "}
                   <i className="ion-chevron-down"></i>
                 </a>
                 <ul
@@ -147,12 +147,12 @@ const Header = () => {
                 >
                   <li>
                     <a href="#">
-                      <img src="/assets/img/logo/cigar.jpg" alt="" /> French
+                      <img src="/assets/img/logo/cigar.jpg" alt="" /> Tiếng Pháp
                     </a>
                   </li>
                   <li>
                     <a href="#">
-                      <img src="/assets/img/logo/language2.png" alt="" /> German
+                      <img src="/assets/img/logo/language2.png" alt="" /> Tiếng Đức
                     </a>
                   </li>
                 </ul>
@@ -165,7 +165,7 @@ const Header = () => {
                     toggleDropdown("currency");
                   }}
                 >
-                  USD <i className="ion-chevron-down"></i>
+                  VND <i className="ion-chevron-down"></i>
                 </a>
                 <ul
                   className={`dropdown_currency ${activeDropdown === "currency" ? "open" : ""}`}
@@ -174,7 +174,7 @@ const Header = () => {
                     <a href="#">EUR</a>
                   </li>
                   <li>
-                    <a href="#">BRL</a>
+                    <a href="#">USD</a>
                   </li>
                 </ul>
               </li>
@@ -204,7 +204,7 @@ const Header = () => {
                       className={`dropdown_links ${activeDropdown === "user2" ? "open" : ""}`}
                     >
                       <li>
-                        <Link to="/profile">Profile</Link>
+                        <Link to="/profile">Hồ sơ</Link>
                       </li>
                       <li>
                         <a
@@ -222,11 +222,11 @@ const Header = () => {
                 ) : (
                   <>
                     <li>
-                      <Link to="/login">Login</Link>
+                      <Link to="/login">Đăng nhập</Link>
                     </li>
                     <li>/</li>
                     <li>
-                      <Link to="/register">Register</Link>
+                      <Link to="/register">Đăng ký</Link>
                     </li>
                   </>
                 )}
@@ -236,7 +236,7 @@ const Header = () => {
               <div className="cart_link">
                 <Link to="/cart">
                   <i className="fa fa-shopping-basket"></i>
-                  {cartCount} item(s)
+                  {cartCount} sản phẩm
                 </Link>
               </div>
             )}
@@ -245,67 +245,67 @@ const Header = () => {
           <div id="menu" className="text-left">
             <ul className="offcanvas_main_menu">
               <li className="menu-item-has-children">
-                <a href="#">Home</a>
+                <a href="#">Trang chủ</a>
                 <ul className="sub-menu">
                   <li>
-                    <a href="/">Home 1</a>
+                    <a href="/">Trang chủ 1</a>
                   </li>
                   <li>
-                    <a href="index-2.html">Home 2</a>
+                    <a href="index-2.html">Trang chủ 2</a>
                   </li>
                   <li>
-                    <a href="index-3.html">Home 3</a>
+                    <a href="index-3.html">Trang chủ 3</a>
                   </li>
                   <li>
-                    <a href="index-4.html">Home 4</a>
+                    <a href="index-4.html">Trang chủ 4</a>
                   </li>
                   <li>
-                    <a href="index-5.html">Home 5</a>
+                    <a href="index-5.html">Trang chủ 5</a>
                   </li>
                   <li>
-                    <a href="index-6.html">Home 6</a>
+                    <a href="index-6.html">Trang chủ 6</a>
                   </li>
                   <li>
-                    <a href="index-7.html">Home 7</a>
+                    <a href="index-7.html">Trang chủ 7</a>
                   </li>
                   <li>
-                    <a href="index-8.html">Home 8</a>
+                    <a href="index-8.html">Trang chủ 8</a>
                   </li>
                   <li>
-                    <a href="index-9.html">Home 9</a>
+                    <a href="index-9.html">Trang chủ 9</a>
                   </li>
                 </ul>
               </li>
               <li className="menu-item-has-children">
-                <a href="#">Shop</a>
+                <a href="#">Cửa hàng</a>
                 <ul className="sub-menu">
                   <li className="menu-item-has-children">
-                    <a href="#">Shop Layouts</a>
+                    <a href="#">Bố cục cửa hàng</a>
                     <ul className="sub-menu">
                       <li>
                         <a href="shop.html">shop</a>
                       </li>
                       <li>
-                        <a href="shop-fullwidth.html">Full Width</a>
+                        <a href="shop-fullwidth.html">Toàn chiều rộng</a>
                       </li>
                       <li>
-                        <a href="shop-fullwidth-list.html">Full Width list</a>
+                        <a href="shop-fullwidth-list.html">Danh sách toàn chiều rộng</a>
                       </li>
                       <li>
-                        <a href="shop-right-sidebar.html">Right Sidebar</a>
+                        <a href="shop-right-sidebar.html">Thanh bên phải</a>
                       </li>
                       <li>
                         <a href="shop-right-sidebar-list.html">
-                          Right Sidebar list
+                          Thanh bên phải list
                         </a>
                       </li>
                       <li>
-                        <a href="shop-list.html">List View</a>
+                        <a href="shop-list.html">Xem danh sách</a>
                       </li>
                     </ul>
                   </li>
                   <li className="menu-item-has-children">
-                    <a href="#">other Pages</a>
+                    <a href="#">Các trang khác</a>
                     <ul className="sub-menu">
                       <li>
                         <a href="portfolio.html">portfolio</a>
@@ -314,18 +314,18 @@ const Header = () => {
                         <a href="portfolio-details.html">portfolio details</a>
                       </li>
                       <li>
-                        <a href="checkout.html">Checkout</a>
+                        <a href="checkout.html">Thanh toán</a>
                       </li>
                       <li>
-                        <a href="checkout.html">Checkout</a>
+                        <a href="checkout.html">Thanh toán</a>
                       </li>
                       <li>
-                        <Link to="/profile">my account</Link>
+                        <Link to="/profile">Tài khoản</Link>
                       </li>
                     </ul>
                   </li>
                   <li className="menu-item-has-children">
-                    <a href="#">Product Types</a>
+                    <a href="#">Loại sản phẩm</a>
                     <ul className="sub-menu">
                       <li>
                         <a href="product-details.html">product details</a>
@@ -344,7 +344,7 @@ const Header = () => {
                 </ul>
               </li>
               <li className="menu-item-has-children">
-                <a href="#">blog</a>
+                <a href="#">Tin tức</a>
                 <ul className="sub-menu">
                   <li>
                     <a href="blog.html">blog</a>
@@ -361,28 +361,28 @@ const Header = () => {
                 </ul>
               </li>
               <li className="menu-item-has-children">
-                <a href="#">pages</a>
+                <a href="#">Trang</a>
                 <ul className="sub-menu">
                   <li>
-                    <Link to="/about">About Us</Link>
+                    <Link to="/about">Về chúng tôi</Link>
                   </li>
                   <li>
                     <a href="services.html">services</a>
                   </li>
                   <li>
-                    <a href="faq.html">Frequently Questions</a>
+                    <a href="faq.html">Câu hỏi thường gặp</a>
                   </li>
                   <li>
-                    <Link to="/contact">contact</Link>
+                    <Link to="/contact">Liên hệ</Link>
                   </li>
                   <li>
                     <a href="login.html">login</a>
                   </li>
                   <li>
-                    <a href="wishlist.html">Wishlist</a>
+                    <a href="wishlist.html">Danh sách yêu thích</a>
                   </li>
                   <li>
-                    <a href="404.html">Error 404</a>
+                    <a href="404.html">Lỗi 404</a>
                   </li>
                   <li>
                     <a href="compare.html">compare</a>
@@ -396,13 +396,13 @@ const Header = () => {
                 </ul>
               </li>
               <li className="menu-item-has-children">
-                <Link to="/profile">my account</Link>
+                <Link to="/profile">Tài khoản</Link>
               </li>
               <li className="menu-item-has-children">
-                <Link to="/about">About Us</Link>
+                <Link to="/about">Về chúng tôi</Link>
               </li>
               <li className="menu-item-has-children">
-                <Link to="/contact">Contact Us</Link>
+                <Link to="/contact">Liên hệ</Link>
               </li>
             </ul>
           </div>
@@ -454,11 +454,11 @@ const Header = () => {
                 <div className="welcome_text">
                   <ul>
                     <li>
-                      <span>Free Delivery:</span> Take advantage of our time to
-                      save event
+                      <span>Miễn phí vận chuyển:</span> Tận dụng cơ hội tiết
+                      kiệm của chúng tôi
                     </li>
                     <li>
-                      <span>Free Returns *</span> Satisfaction guaranteed
+                      <span>Miễn phí đổi trả *</span> Đảm bảo hài lòng
                     </li>
                   </ul>
                 </div>
@@ -482,7 +482,7 @@ const Header = () => {
                           className={`dropdown_links ${activeDropdown === "user3" ? "open" : ""}`}
                         >
                           <li>
-                            <Link to="/profile">Profile</Link>
+                            <Link to="/profile">Hồ sơ</Link>
                           </li>
                           <li>
                             <a
@@ -500,11 +500,11 @@ const Header = () => {
                     ) : (
                       <>
                         <li>
-                          <Link to="/login">Login</Link>
+                          <Link to="/login">Đăng nhập</Link>
                         </li>
                         <li>/</li>
                         <li>
-                          <Link to="/register">Register</Link>
+                          <Link to="/register">Đăng ký</Link>
                         </li>
                       </>
                     )}
@@ -538,7 +538,7 @@ const Header = () => {
                       <div className="cart_link">
                         <Link to="/cart">
                           <i className="fa fa-shopping-basket"></i>
-                          {cartCount > 0 && `${cartCount} item(s)`}
+                          {cartCount > 0 && `${cartCount} sản phẩm`}
                         </Link>
                       </div>
                     )}
@@ -559,7 +559,7 @@ const Header = () => {
                             isActive ? "active" : ""
                           }
                         >
-                          Home
+                          Trang chủ
                         </NavLink>
                       </li>
                       <li>
@@ -569,7 +569,7 @@ const Header = () => {
                             isActive ? "active" : ""
                           }
                         >
-                          Products
+                          Sản phẩm
                         </NavLink>
                       </li>
                     </ul>
@@ -592,7 +592,7 @@ const Header = () => {
                             isActive ? "active" : ""
                           }
                         >
-                          About Us
+                          Về chúng tôi
                         </NavLink>
                       </li>
                       <li>
@@ -602,7 +602,7 @@ const Header = () => {
                             isActive ? "active" : ""
                           }
                         >
-                          Contact Us
+                          Liên hệ
                         </NavLink>
                       </li>
                     </ul>
@@ -649,7 +649,7 @@ const Header = () => {
                               isActive ? "active" : ""
                             }
                           >
-                            About Us
+                            Về chúng tôi
                           </NavLink>
                         </li>
                         <li>
@@ -659,7 +659,7 @@ const Header = () => {
                               isActive ? "active" : ""
                             }
                           >
-                            Contact Us
+                            Liên hệ
                           </NavLink>
                         </li>
                       </ul>

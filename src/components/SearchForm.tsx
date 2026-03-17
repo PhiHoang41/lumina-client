@@ -8,7 +8,7 @@ interface SearchFormProps {
 }
 
 const SearchForm = ({
-  placeholder = "Search entire store here...",
+  placeholder = "Tìm kiếm sản phẩm...",
   showCategorySelect = true,
   className = "",
 }: SearchFormProps) => {
@@ -35,7 +35,7 @@ const SearchForm = ({
     <form onSubmit={handleSubmit} className={className} action="#">
       {showCategorySelect && (
         <select className="select_option" name="select" id="categori">
-          <option value="all">All Categories</option>
+          <option value="all">Tất cả danh mục</option>
         </select>
       )}
       <input

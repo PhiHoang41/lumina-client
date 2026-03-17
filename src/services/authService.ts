@@ -39,6 +39,19 @@ export interface LoginResponse {
   };
 }
 
+export interface UpdateUserPayload {
+  fullName?: string;
+  phone?: string | null;
+  avatar?: string | null;
+  address?: string | null;
+}
+
+export interface UpdateUserResponse {
+  success: boolean;
+  message: string;
+  data: User;
+}
+
 const authService = {
   register: async (data: RegisterRequest): Promise<RegisterResponse> => {
     const response = await api.post<RegisterResponse>("/auth/register", data);
@@ -52,6 +65,11 @@ const authService = {
 
   getCurrentUser: async () => {
     const response = await api.get("/users/me");
+    return response.data;
+  },
+
+  updateUser: async (data: UpdateUserPayload): Promise<UpdateUserResponse> => {
+    const response = await api.put<UpdateUserResponse>("/users/me/profile", data);
     return response.data;
   },
 

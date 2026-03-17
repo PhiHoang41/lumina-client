@@ -1,0 +1,272 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+.required {
+  color: #e74c3c;
+}
+
+.input {
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  font-family: inherit;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #ff6a28;
+  box-shadow: 0 0 0 3px rgba(255, 106, 40, 0.1);
+}
+
+.input:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+
+.inputDisabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+  border-color: #e0e0e0;
+}
+
+.helperText {
+  font-size: 12px;
+  color: #888;
+  margin-top: 4px;
+}
+
+.inputError {
+  border-color: #e74c3c;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.errorMessage {
+  font-size: 13px;
+  color: #e74c3c;
+  margin-top: 4px;
+}
+
+.submitButton {
+  padding: 14px 28px;
+  background-color: #ff6a28;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.submitButton:hover:not(:disabled) {
+  background-color: #e55a1a;
+}
+
+.submitButton:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.submitButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #fff;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.avatarSection {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #eee;
+}
+
+.avatarPreview {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #ff6a28;
+}
+
+.avatarPlaceholder {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  color: #999;
+  border: 3px solid #ddd;
+}
+
+.avatarInfo {
+  flex: 1;
+}
+
+.avatarLabel {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.avatarButton {
+  padding: 10px 20px;
+  background-color: #fff;
+  color: #ff6a28;
+  border: 2px solid #ff6a28;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.avatarButton:hover {
+  background-color: #ff6a28;
+  color: #fff;
+}
+
+.avatarInput {
+  display: none;
+}
+
+.successMessage {
+  padding: 14px 16px;
+  background-color: #d4edda;
+  color: #155724;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.passwordForm {
+  width: 100%;
+}
+
+.passwordRow {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.passwordStrength {
+  margin-top: 8px;
+}
+
+.strengthBar {
+  height: 4px;
+  background-color: #eee;
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+
+.strengthFill {
+  height: 100%;
+  transition: width 0.3s ease, background-color 0.3s ease;
+  border-radius: 2px;
+}
+
+.strengthFill.weak {
+  background-color: #e74c3c;
+}
+
+.strengthFill.medium {
+  background-color: #f39c12;
+}
+
+.strengthFill.strong {
+  background-color: #27ae60;
+}
+
+.strengthText {
+  font-size: 12px;
+  color: #666;
+}
+
+.passwordRequirements {
+  margin-top: 12px;
+  padding: 14px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+
+.requirementsTitle {
+  font-size: 13px;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.requirementsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.requirementItem {
+  font-size: 13px;
+  color: #777;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.requirementItem.valid {
+  color: #27ae60;
+}
+
+.requirementItem i {
+  font-size: 12px;
+  width: 16px;
+}

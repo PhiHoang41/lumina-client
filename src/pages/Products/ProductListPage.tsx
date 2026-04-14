@@ -36,7 +36,7 @@ const ProductListPage = () => {
 
   const { data: allProductsData } = useQuery({
     queryKey: ["allProducts"],
-    queryFn: () => productService.getProducts({ isActive: true, limit: 1000 }),
+    queryFn: () => productService.getProducts({ isActive: true, inStock: true, limit: 1000 }),
   });
 
   const categories = categoriesData?.data || [];
@@ -75,6 +75,7 @@ const ProductListPage = () => {
       page: currentPage,
       limit: ITEMS_PER_PAGE,
       isActive: true,
+      inStock: true,
     };
 
     if (searchQuery) {

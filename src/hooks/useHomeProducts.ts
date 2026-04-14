@@ -21,6 +21,7 @@ export function useHomeProducts() {
           category: category._id,
           limit: 8,
           isActive: true,
+          inStock: true,
         }),
       enabled: categories.length > 0,
     })),

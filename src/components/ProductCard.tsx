@@ -48,7 +48,7 @@ const ProductCard = ({ product, viewMode = "grid-4" }: ProductCardProps) => {
           <h3>
             <Link to={`/products/${product.slug}`}>{product.name}</Link>
           </h3>
-          <div className="product_ratting">
+          {/* <div className="product_ratting">
             <ul>
               {[...Array(5)].map((_, index) => (
                 <li key={index}>
@@ -58,7 +58,7 @@ const ProductCard = ({ product, viewMode = "grid-4" }: ProductCardProps) => {
                 </li>
               ))}
             </ul>
-          </div>
+          </div> */}
           <div className="product_price">
             <span className="current_price">{formatVND(product.price)}</span>
           </div>

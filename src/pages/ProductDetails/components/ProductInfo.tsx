@@ -146,7 +146,7 @@ const ProductInfo = ({ product, productId }: ProductInfoProps) => {
       <form onSubmit={handleAddToCart}>
         <h1>{product.name}</h1>
 
-        <div className="product_ratting">
+        {/* <div className="product_ratting">
           <ul>
             {[...Array(5)].map((_, index) => (
               <li key={index}>
@@ -164,7 +164,7 @@ const ProductInfo = ({ product, productId }: ProductInfoProps) => {
               <a href="#"> Viết đánh giá </a>
             </li>
           </ul>
-        </div>
+        </div> */}
 
         <div className="product_price">
           <span className="current_price">{displayPrice}</span>
@@ -257,7 +257,7 @@ Thêm vào giỏ
           </button>
         </div>
 
-        <div className="product_d_action">
+        {/* <div className="product_d_action">
           <ul>
             <li>
               <a href="#" title="Thêm vào wishlist">
@@ -272,10 +272,10 @@ Thêm vào giỏ
               </a>
             </li>
           </ul>
-        </div>
+        </div> */}
       </form>
 
-      <div className="priduct_social">
+      {/* <div className="priduct_social">
         <h3>Chia sẻ:</h3>
         <ul>
           <li>
@@ -304,7 +304,7 @@ Thêm vào giỏ
             </a>
           </li>
         </ul>
-      </div>
+      </div> */}
     </div>
   );
 };

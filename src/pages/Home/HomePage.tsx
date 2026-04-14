@@ -1,7 +1,6 @@
 import HeroSlider from "./HeroSlider";
 import BannerSection from "./BannerSection";
 import ProductSection from "./ProductSection";
-import BlogSection from "./BlogSection";
 
 const HomePage = () => {
   return (
@@ -9,7 +8,6 @@ const HomePage = () => {
       <HeroSlider />
       <BannerSection />
       <ProductSection />
-      <BlogSection />
     </>
   );
 };

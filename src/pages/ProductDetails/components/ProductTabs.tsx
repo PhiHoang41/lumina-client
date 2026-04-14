@@ -29,7 +29,7 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
                       Thông tin thêm
                     </a>
                   </li>
-                  <li>
+                  {/* <li>
                     <a
                       className={activeTab === "reviews" ? "active" : ""}
                       onClick={(e) => {
@@ -40,7 +40,7 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
                     >
                       Đánh giá
                     </a>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
 
@@ -55,10 +55,8 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
                   </div>
                 )}
 
-                {/* Reviews Tab */}
-                {activeTab === "reviews" && (
+                {/* {activeTab === "reviews" && (
                   <div className="tab-pane fade show active">
-                    {/* Hardcoded Review 1 */}
                     <div className="product_info_inner">
                       <div className="product_ratting mb-10">
                         <ul>
@@ -79,7 +77,6 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
                       </div>
                     </div>
 
-                    {/* Review Form */}
                     <div className="product_review_form">
                       <form action="#">
                         <h2>Thêm đánh giá </h2>
@@ -108,7 +105,7 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
                       </form>
                     </div>
                   </div>
-                )}
+                )} */}
               </div>
             </div>
           </div>

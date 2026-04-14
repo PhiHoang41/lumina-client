@@ -79,28 +79,6 @@ const Footer = () => {
                       </a>
                     </p>
                     <p>Email: demo@example.com</p>
-                    <ul>
-                      <li>
-                        <a href="#" title="Twitter">
-                          <i className="fa fa-twitter"></i>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" title="google-plus">
-                          <i className="fa fa-google-plus"></i>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" title="facebook">
-                          <i className="fa fa-facebook"></i>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" title="youtube">
-                          <i className="fa fa-youtube"></i>
-                        </a>
-                      </li>
-                    </ul>
                   </div>
                 </div>
               </div>
@@ -155,17 +133,6 @@ const Footer = () => {
               </div>
               <div className="col-lg-6 col-md-6">
                 <div className="footer_custom_links">
-                  <ul>
-                    <li>
-                      <a href="#">Lịch sử đơn hàng</a>
-                    </li>
-                    <li>
-                      <a href="wishlist.html">Danh sách yêu thích</a>
-                    </li>
-                    <li>
-                      <a href="#">Bản tin</a>
-                    </li>
-                  </ul>
                 </div>
               </div>
             </div>
